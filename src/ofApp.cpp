@@ -39,14 +39,7 @@ void ofApp::setup(){
 
     //Add Agents
     this->addAgents();
-    
-    
-	//Init Position
-//	arm[0]->piradToPosition(0.);
-//	arm[1]->piradToPosition(0.);
-//	arm[2]->piradToPosition(0.);
-//	arm[3]->piradToPosition(0.);
-    
+
     
 }
 
@@ -322,6 +315,7 @@ void ofApp::addAgents(){
     model->addAgent(&ag4);
     
  
+    //Sync ag position and arm position
     this->syncPositions();
     
 }
