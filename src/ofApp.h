@@ -32,6 +32,8 @@
 typedef struct system_t {
 
     int fps;
+    int reset_flg;
+    int stop_flg;
     
 }system_t;
 
@@ -85,8 +87,8 @@ class ofApp : public ofBaseApp{
        	float pirad_circle4;
     
 		//System Variables
-	    int reset_flg; //Init reset flag
-	    int stop_flg; // Init stop flag
+//	    int reset_flg; //Init reset flag
+//	    int stop_flg; // Init stop flag
 	    int agent_count;
         ToolKit toolKit;
         //Font

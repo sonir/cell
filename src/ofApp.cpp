@@ -15,8 +15,8 @@ void ofApp::setup(){
     dekar.loadFont("Dekar.otf", 20, true, true);
     
 	//APP Setup
-    reset_flg = 0; //Init reset flag
-    stop_flg = 1; // Init stop flag
+    system.reset_flg = 0; //Init reset flag
+    system.stop_flg = 1; // Init stop flag
     int ofSetFrameRate(system.fps); //Setup Frame Rate
     if(false)toolKit.dice(6); //No meaning code to avoid "Unused" warning.
     
@@ -47,14 +47,14 @@ void ofApp::setup(){
 void ofApp::update(){
 
 
-    if(metro->alart())cout << "foo" << endl;
+    //if(metro->alart())cout << "foo" << endl;
     
     //Reset check for Mutex
-    if(reset_flg){
-        reset_flg = 0;
+    if(system.reset_flg){
+        system.reset_flg = 0;
     }        
     //Do Agent Cycle
-    if(!stop_flg) model->cycle();
+    if(!system.stop_flg) model->cycle();
 
     sendData();
 	listenOsc();
@@ -70,98 +70,54 @@ void ofApp::draw(){
     
     ofBackground(0, 0, 0);
 
-
-    //Agent Processing
-
     
-    //If there are agents
-//    if(!stop_flg)
-//     {
-//        //Do Model Code here.
-//     
-//     }else { // end of if (stop_flg)
+    //Draw ARM1
+    syncPosition(0);
+    center = space->getScreenPosition(arm[0]->center.x,arm[0]->center.y);
+     // node = space->getScreenPosition(arm[0]->arc_position.x,arm[0]->arc_position.y);
+     node = space->getScreenPosition(arm[0]->arc_position.x,arm[0]->arc_position.y);
+     ofSetHexColor(0xFF0000);
+     if(checkIntersect(arm[0])){ //If the lines are crossing
+         digitalFis.flash(PF,(fis_color)toolKit.dice(3));
+         // digitalFis.flash(PF,(fis_color)getAgent.condition);
+     }
+     ofLine(center.x,center.y,node.x,node.y); //Change Line Color
 
-			//For Servo1
-            syncPosition(0);
-            center = space->getScreenPosition(arm[0]->center.x,arm[0]->center.y);
-             // node = space->getScreenPosition(arm[0]->arc_position.x,arm[0]->arc_position.y);
-             node = space->getScreenPosition(arm[0]->arc_position.x,arm[0]->arc_position.y);
-             ofSetHexColor(0xFF0000);
-             if(checkIntersect(arm[0])){ //If the lines are crossing
-                 digitalFis.flash(PF,(fis_color)toolKit.dice(3));
-                 // digitalFis.flash(PF,(fis_color)getAgent.condition);
-             }
-             ofLine(center.x,center.y,node.x,node.y); //Change Line Color
+    //Draw ARM2
+    syncPosition(1);
+     center = space->getScreenPosition(arm[1]->center.x,arm[1]->center.y);
+     node = space->getScreenPosition(arm[1]->arc_position.x,arm[1]->arc_position.y);
+     ofSetHexColor(0x00FF77);
+     if(checkIntersect(arm[1])){ //If the lines are crossing
+         digitalFis.flash(TB,(fis_color)toolKit.dice(3));
+     }
+     ofLine(center.x,center.y,node.x,node.y);                
 
-			//For Servo2
-            syncPosition(1);
-             center = space->getScreenPosition(arm[1]->center.x,arm[1]->center.y);
-             node = space->getScreenPosition(arm[1]->arc_position.x,arm[1]->arc_position.y);
-             ofSetHexColor(0x00FF77);
-             if(checkIntersect(arm[1])){ //If the lines are crossing
-                 digitalFis.flash(TB,(fis_color)toolKit.dice(3));
-             }
-             ofLine(center.x,center.y,node.x,node.y);                
+    //Draw ARM3
+    syncPosition(2);
+     center = space->getScreenPosition(arm[2]->center.x,arm[2]->center.y);
+     node = space->getScreenPosition(arm[2]->arc_position.x,arm[2]->arc_position.y);
+     ofSetHexColor(0x0000FF);
+     if(checkIntersect(arm[2])){ //If the lines are crossing
+         digitalFis.flash(GT,(fis_color)toolKit.dice(3));
+     }
+     ofLine(center.x,center.y,node.x,node.y);                
 
-             //For Servo3
-            syncPosition(2);
-             center = space->getScreenPosition(arm[2]->center.x,arm[2]->center.y);
-             node = space->getScreenPosition(arm[2]->arc_position.x,arm[2]->arc_position.y);
-             ofSetHexColor(0x0000FF);
-             if(checkIntersect(arm[2])){ //If the lines are crossing
-                 digitalFis.flash(GT,(fis_color)toolKit.dice(3));
-             }
-             ofLine(center.x,center.y,node.x,node.y);                
+    //Draw ARM4
+    syncPosition(3);
+     center = space->getScreenPosition(arm[3]->center.x,arm[3]->center.y);
+     node = space->getScreenPosition(arm[3]->arc_position.x,arm[3]->arc_position.y);
+     ofSetHexColor(0xFFFF00);
+     if(checkIntersect(arm[3])){ //If the lines are crossing
+         digitalFis.flash(BS,(fis_color)toolKit.dice(3));
+     }
+     ofLine(center.x,center.y,node.x,node.y);
 
-             //For Servo4
-            syncPosition(3);
-             center = space->getScreenPosition(arm[3]->center.x,arm[3]->center.y);
-             node = space->getScreenPosition(arm[3]->arc_position.x,arm[3]->arc_position.y);
-             ofSetHexColor(0xFFFF00);
-             if(checkIntersect(arm[3])){ //If the lines are crossing
-                 digitalFis.flash(BS,(fis_color)toolKit.dice(3));
-             }
-             ofLine(center.x,center.y,node.x,node.y);
 
-//     }
-    
-    
-    
+    //Draw Fonts
     ofSetColor(225);
     dekar.drawString("SPC : START SIMULATOR", 30, 35);
     
-//    // arm[0]->piradToPosition( abs(sin(nxt)) );
-//    arm[0]->piradToPosition( pirad_arm[0] );     
-//	center = space->getScreenPosition(arm[0]->center.x,arm[0]->center.y);
-//	node = space->getScreenPosition(arm[0]->arc_position.x,arm[0]->arc_position.y);
-//    ofSetHexColor(0xFF0000);
-//    checkIntersect(arm[0]);
-//    ofLine(center.x,center.y,node.x,node.y);
-//
-//    // arm[1]->piradToPosition( abs(sin(nxt)) );
-//    arm[1]->piradToPosition( pirad_arm[1] );     
-//	center = space->getScreenPosition(arm[1]->center.x,arm[1]->center.y);
-//	node = space->getScreenPosition(arm[1]->arc_position.x,arm[1]->arc_position.y);
-//    ofSetHexColor(0x00FF77);
-//    checkIntersect(arm[1]);
-//    ofLine(center.x,center.y,node.x,node.y);
-//
-//    // arm[2]->piradToPosition( abs(sin(nxt)) );
-//    arm[2]->piradToPosition( pirad_arm[2] );     
-//    center = space->getScreenPosition(arm[2]->center.x,arm[2]->center.y);
-//    node = space->getScreenPosition(arm[2]->arc_position.x,arm[2]->arc_position.y);
-//    ofSetHexColor(0x0000FF);
-//    checkIntersect(arm[2]);
-//    ofLine(center.x,center.y,node.x,node.y);
-//
-//    // arm[3]->piradToPosition( abs(sin(nxt)) );
-//    arm[3]->piradToPosition( pirad_arm[3] );     
-//    center = space->getScreenPosition(arm[3]->center.x,arm[3]->center.y);
-//    node = space->getScreenPosition(arm[3]->arc_position.x,arm[3]->arc_position.y);
-//    ofSetHexColor(0xFFFF00);
-//    checkIntersect(arm[3]);
-//    ofLine(center.x,center.y,node.x,node.y);
-//   
     
 }
 
@@ -174,9 +130,9 @@ void ofApp::keyPressed(int key){
 void ofApp::keyReleased(int key){
 
     if(key == OF_KEY_RETURN){
-    	stop_flg = ( (stop_flg-1)*(-1) ); //Invert the value
+    	system.stop_flg = ( (system.stop_flg-1)*(-1) ); //Invert the value
     } else if (key == 0x20){
-    	stop_flg = ( (stop_flg-1)*(-1) ); //Invert the value
+    	system.stop_flg = ( (system.stop_flg-1)*(-1) ); //Invert the value
     }
 
 }
