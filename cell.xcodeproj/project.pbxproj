@@ -51,7 +51,7 @@
 		E7E077E515D3B63C0020DFD4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */; };
 		E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E715D3B6510020DFD4 /* QTKit.framework */; };
 		E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F985F515E0DE99003869B5 /* Accelerate.framework */; };
-		F20F6E8119FEF49900937ACF /* Metro.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20F6E7F19FEF49900937ACF /* Metro.cpp */; };
+		F20F6EDA19FEF72A00937ACF /* slMetro.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F20F6EC119FEF72A00937ACF /* slMetro.cpp */; };
 		F248BFAC19FEA5BD00757B40 /* cellModelDataFoundation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F248BF8E19FEA5BC00757B40 /* cellModelDataFoundation.cpp */; };
 		F248BFAD19FEA5BD00757B40 /* slCellModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F248BF9019FEA5BC00757B40 /* slCellModel.cpp */; };
 		F248BFAE19FEA5BD00757B40 /* Toolkit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F248BF9319FEA5BC00757B40 /* Toolkit.cpp */; };
@@ -169,8 +169,8 @@
 		E7E077E715D3B6510020DFD4 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		E7F985F515E0DE99003869B5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
 		ECF8674C7975F1063C5E30CA /* ofxGuiGroup.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxGuiGroup.cpp; path = ../../../addons/ofxGui/src/ofxGuiGroup.cpp; sourceTree = SOURCE_ROOT; };
-		F20F6E7F19FEF49900937ACF /* Metro.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Metro.cpp; path = ../../../../../../../../Desktop/Metro.cpp; sourceTree = "<group>"; };
-		F20F6E8019FEF49900937ACF /* Metro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Metro.h; path = ../../../../../../../../Desktop/Metro.h; sourceTree = "<group>"; };
+		F20F6EC119FEF72A00937ACF /* slMetro.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = slMetro.cpp; sourceTree = "<group>"; };
+		F20F6EC219FEF72A00937ACF /* slMetro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slMetro.h; sourceTree = "<group>"; };
 		F248BF8E19FEA5BC00757B40 /* cellModelDataFoundation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cellModelDataFoundation.cpp; sourceTree = "<group>"; };
 		F248BF8F19FEA5BC00757B40 /* cellModelDataFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cellModelDataFoundation.h; sourceTree = "<group>"; };
 		F248BF9019FEA5BC00757B40 /* slCellModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = slCellModel.cpp; sourceTree = "<group>"; };
@@ -333,6 +333,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				F20F6E8219FEF72A00937ACF /* slMetro */,
 				F248BF4F19FEA5BC00757B40 /* slCellModel */,
 				F2A2751719FAEDF000371500 /* slCircular */,
 				F2A2755919FAEDF000371500 /* slEuclid */,
@@ -438,8 +439,6 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
-				F20F6E7F19FEF49900937ACF /* Metro.cpp */,
-				F20F6E8019FEF49900937ACF /* Metro.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -460,6 +459,24 @@
 				38871A5825686AE018EC2BF0 /* libs */,
 			);
 			name = ofxOsc;
+			sourceTree = "<group>";
+		};
+		F20F6E8219FEF72A00937ACF /* slMetro */ = {
+			isa = PBXGroup;
+			children = (
+				F20F6EC019FEF72A00937ACF /* src */,
+			);
+			name = slMetro;
+			path = ../../../addons/slMetro;
+			sourceTree = "<group>";
+		};
+		F20F6EC019FEF72A00937ACF /* src */ = {
+			isa = PBXGroup;
+			children = (
+				F20F6EC119FEF72A00937ACF /* slMetro.cpp */,
+				F20F6EC219FEF72A00937ACF /* slMetro.h */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		F248BF4F19FEA5BC00757B40 /* slCellModel */ = {
@@ -629,6 +646,7 @@
 				F2A275FF19FAEDF000371500 /* slCircular.cpp in Sources */,
 				5CBB2AB3A60F65431D7B555D /* ofxButton.cpp in Sources */,
 				B266578FC55D23BFEBC042E7 /* ofxGuiGroup.cpp in Sources */,
+				F20F6EDA19FEF72A00937ACF /* slMetro.cpp in Sources */,
 				483908258D00B98B4BE69F07 /* ofxLabel.cpp in Sources */,
 				F285EB3169F1566CA3D93C20 /* ofxPanel.cpp in Sources */,
 				837220E80EB56CD44AD27F2A /* ofxSlider.cpp in Sources */,
@@ -645,7 +663,6 @@
 				F248BFAE19FEA5BD00757B40 /* Toolkit.cpp in Sources */,
 				510CAFE035E576A4E1502D52 /* UdpSocket.cpp in Sources */,
 				A29D8C96AE042ECEAA1BD4F3 /* NetworkingUtilsWin.cpp in Sources */,
-				F20F6E8119FEF49900937ACF /* Metro.cpp in Sources */,
 				28090DEB5109115003E8F1C5 /* UdpSocketWin.cpp in Sources */,
 				62545D179C94265CA1389D4A /* OscOutboundPacketStream.cpp in Sources */,
 				F2A2761719FAEDF100371500 /* slEuclid.cpp in Sources */,
@@ -892,6 +909,13 @@
 					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slCellModel/libs/necessaryLib/lib/linux64,
 					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slCellModel/libs/necessaryLib/lib/osx,
 					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slCellModel/libs/necessaryLib/lib/win_cb,
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slMetro/libs/necessaryLib/lib/android/armeabi,
+					"/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slMetro/libs/necessaryLib/lib/android/armeabi-v7a",
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slMetro/libs/necessaryLib/lib/ios,
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slMetro/libs/necessaryLib/lib/linux,
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slMetro/libs/necessaryLib/lib/linux64,
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slMetro/libs/necessaryLib/lib/osx,
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slMetro/libs/necessaryLib/lib/win_cb,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
 				WRAPPER_EXTENSION = app;
@@ -1026,6 +1050,13 @@
 					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slCellModel/libs/necessaryLib/lib/linux64,
 					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slCellModel/libs/necessaryLib/lib/osx,
 					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slCellModel/libs/necessaryLib/lib/win_cb,
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slMetro/libs/necessaryLib/lib/android/armeabi,
+					"/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slMetro/libs/necessaryLib/lib/android/armeabi-v7a",
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slMetro/libs/necessaryLib/lib/ios,
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slMetro/libs/necessaryLib/lib/linux,
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slMetro/libs/necessaryLib/lib/linux64,
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slMetro/libs/necessaryLib/lib/osx,
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slMetro/libs/necessaryLib/lib/win_cb,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

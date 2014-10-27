@@ -25,7 +25,7 @@
 #include "slCircular.h"
 #include "slEuclid.h"
 #include "slCellModel.h"
-//#include "slMetro.h"
+#include "slMetro.h"
 #include "DigitalFis.h"
 
 
@@ -70,6 +70,8 @@ class ofApp : public ofBaseApp{
         //OSC
         ofxOscSender server;
     
+        //Utilities
+        slMetro *metro;
         //Fis
     	DigitalFis digitalFis;
     

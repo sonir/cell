@@ -8,6 +8,7 @@ void ofApp::setup(){
     
     //System Setup
     system.fps = 60;
+    metro = new slMetro(1.0f);
     
     //Font Setup
     ofTrueTypeFont::setGlobalDpi(72);
@@ -18,7 +19,6 @@ void ofApp::setup(){
     stop_flg = 1; // Init stop flag
     int ofSetFrameRate(system.fps); //Setup Frame Rate
     if(false)toolKit.dice(6); //No meaning code to avoid "Unused" warning.
-//    metro = new slMetro(1.);
     
 	//OSC Setup
 	cout << "listening for osc messages on port " << PORT << "\n";
@@ -47,7 +47,7 @@ void ofApp::setup(){
 void ofApp::update(){
 
 
-//     if(metro->alart())cout << "foo" << endl;
+    if(metro->alart())cout << "foo" << endl;
     
     //Reset check for Mutex
     if(reset_flg){
