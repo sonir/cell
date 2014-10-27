@@ -175,7 +175,6 @@
 		F248BF9219FEA5BC00757B40 /* slCellModelSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slCellModelSetup.h; sourceTree = "<group>"; };
 		F248BF9319FEA5BC00757B40 /* Toolkit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Toolkit.cpp; sourceTree = "<group>"; };
 		F248BF9419FEA5BC00757B40 /* Toolkit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Toolkit.h; sourceTree = "<group>"; };
-		F2A2755619FAEDF000371500 /* slCircular 2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "slCircular 2.h"; sourceTree = "<group>"; };
 		F2A2755719FAEDF000371500 /* slCircular.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = slCircular.cpp; sourceTree = "<group>"; };
 		F2A2755819FAEDF000371500 /* slCircular.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slCircular.h; sourceTree = "<group>"; };
 		F2A2759819FAEDF000371500 /* slEuclid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = slEuclid.cpp; sourceTree = "<group>"; };
@@ -493,7 +492,6 @@
 		F2A2755519FAEDF000371500 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				F2A2755619FAEDF000371500 /* slCircular 2.h */,
 				F2A2755719FAEDF000371500 /* slCircular.cpp */,
 				F2A2755819FAEDF000371500 /* slCircular.h */,
 			);

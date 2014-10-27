@@ -2,15 +2,16 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){    
+
+    //Instanciate Model
+    model = new slCellModel(SCREEN_WIDTH, SCREEN_HEIGHT);
     
     //System Setup
     system.fps = 60;
     
-    
     //Font Setup
     ofTrueTypeFont::setGlobalDpi(72);
     dekar.loadFont("Dekar.otf", 20, true, true);
-
     
 	//APP Setup
     reset_flg = 0; //Init reset flag
@@ -28,19 +29,23 @@ void ofApp::setup(){
 
 
     //Set Corner
-	circle1 = new slCircular(-0.7,0.7,1.1, -0.75);
-	circle2 = new slCircular(0.7,0.7,1.1,0.75);
-	circle3 = new slCircular(0.7,-0.7, 1.1, .25);
-	circle4 = new slCircular(-0.7,-0.7,1.1, -.25);
+	arm[0] = new slCircular(-0.7,0.7,1.1, -0.75);
+	arm[1] = new slCircular(0.7,0.7,1.1,0.75);
+	arm[2] = new slCircular(0.7,-0.7, 1.1, .25);
+	arm[3] = new slCircular(-0.7,-0.7,1.1, -.25);
 	space = new slEuclid(SCREEN_WIDTH , SCREEN_HEIGHT);                   
 
 	pirad = 0.;
 
+    //Add Agents
+    this->addAgents();
+    
+    
 	//Init Position
-	circle1->piradToPosition(0.);
-	circle2->piradToPosition(0.);
-	circle3->piradToPosition(0.);
-	circle4->piradToPosition(0.);
+//	arm[0]->piradToPosition(0.);
+//	arm[1]->piradToPosition(0.);
+//	arm[2]->piradToPosition(0.);
+//	arm[3]->piradToPosition(0.);
     
     
 }
@@ -56,7 +61,7 @@ void ofApp::update(){
         reset_flg = 0;
     }        
     //Do Agent Cycle
-//    if(!stop_flg) gismodel.cycle();
+    if(!stop_flg) model->cycle();
 
     sendData();
 	listenOsc();
@@ -77,91 +82,91 @@ void ofApp::draw(){
 
     
     //If there are agents
-    if(!stop_flg)
-     {
-        //Do Model Code here.
-     
-     }else { // end of if (stop_flg)
+//    if(!stop_flg)
+//     {
+//        //Do Model Code here.
+//     
+//     }else { // end of if (stop_flg)
 
 			//For Servo1
-             circle1->piradToPosition( pirad_circle1 );     
-             center = space->getScreenPosition(circle1->center.x,circle1->center.y);
-             // node = space->getScreenPosition(circle1->arc_position.x,circle1->arc_position.y);
-             node = space->getScreenPosition(circle1->arc_position.x,circle1->arc_position.y);
+            syncPosition(0);
+            center = space->getScreenPosition(arm[0]->center.x,arm[0]->center.y);
+             // node = space->getScreenPosition(arm[0]->arc_position.x,arm[0]->arc_position.y);
+             node = space->getScreenPosition(arm[0]->arc_position.x,arm[0]->arc_position.y);
              ofSetHexColor(0xFF0000);
-             if(checkIntersect(circle1)){ //If the lines are crossing
+             if(checkIntersect(arm[0])){ //If the lines are crossing
                  digitalFis.flash(PF,(fis_color)toolKit.dice(3));
                  // digitalFis.flash(PF,(fis_color)getAgent.condition);
              }
              ofLine(center.x,center.y,node.x,node.y); //Change Line Color
 
 			//For Servo2
-             circle2->piradToPosition( pirad_circle2 );     
-             center = space->getScreenPosition(circle2->center.x,circle2->center.y);
-             node = space->getScreenPosition(circle2->arc_position.x,circle2->arc_position.y);
+            syncPosition(1);
+             center = space->getScreenPosition(arm[1]->center.x,arm[1]->center.y);
+             node = space->getScreenPosition(arm[1]->arc_position.x,arm[1]->arc_position.y);
              ofSetHexColor(0x00FF77);
-             if(checkIntersect(circle2)){ //If the lines are crossing
+             if(checkIntersect(arm[1])){ //If the lines are crossing
                  digitalFis.flash(TB,(fis_color)toolKit.dice(3));
              }
              ofLine(center.x,center.y,node.x,node.y);                
 
              //For Servo3
-             circle3->piradToPosition( pirad_circle3 );     
-             center = space->getScreenPosition(circle3->center.x,circle3->center.y);
-             node = space->getScreenPosition(circle3->arc_position.x,circle3->arc_position.y);
+            syncPosition(2);
+             center = space->getScreenPosition(arm[2]->center.x,arm[2]->center.y);
+             node = space->getScreenPosition(arm[2]->arc_position.x,arm[2]->arc_position.y);
              ofSetHexColor(0x0000FF);
-             if(checkIntersect(circle3)){ //If the lines are crossing
+             if(checkIntersect(arm[2])){ //If the lines are crossing
                  digitalFis.flash(GT,(fis_color)toolKit.dice(3));
              }
              ofLine(center.x,center.y,node.x,node.y);                
 
              //For Servo4
-             circle4->piradToPosition( pirad_circle4 );     
-             center = space->getScreenPosition(circle4->center.x,circle4->center.y);
-             node = space->getScreenPosition(circle4->arc_position.x,circle4->arc_position.y);
+            syncPosition(3);
+             center = space->getScreenPosition(arm[3]->center.x,arm[3]->center.y);
+             node = space->getScreenPosition(arm[3]->arc_position.x,arm[3]->arc_position.y);
              ofSetHexColor(0xFFFF00);
-             if(checkIntersect(circle4)){ //If the lines are crossing
+             if(checkIntersect(arm[3])){ //If the lines are crossing
                  digitalFis.flash(BS,(fis_color)toolKit.dice(3));
              }
              ofLine(center.x,center.y,node.x,node.y);
 
-     }
+//     }
     
     
     
     ofSetColor(225);
     dekar.drawString("SPC : START SIMULATOR", 30, 35);
     
-//    // circle1->piradToPosition( abs(sin(nxt)) );
-//    circle1->piradToPosition( pirad_circle1 );     
-//	center = space->getScreenPosition(circle1->center.x,circle1->center.y);
-//	node = space->getScreenPosition(circle1->arc_position.x,circle1->arc_position.y);
+//    // arm[0]->piradToPosition( abs(sin(nxt)) );
+//    arm[0]->piradToPosition( pirad_arm[0] );     
+//	center = space->getScreenPosition(arm[0]->center.x,arm[0]->center.y);
+//	node = space->getScreenPosition(arm[0]->arc_position.x,arm[0]->arc_position.y);
 //    ofSetHexColor(0xFF0000);
-//    checkIntersect(circle1);
+//    checkIntersect(arm[0]);
 //    ofLine(center.x,center.y,node.x,node.y);
 //
-//    // circle2->piradToPosition( abs(sin(nxt)) );
-//    circle2->piradToPosition( pirad_circle2 );     
-//	center = space->getScreenPosition(circle2->center.x,circle2->center.y);
-//	node = space->getScreenPosition(circle2->arc_position.x,circle2->arc_position.y);
+//    // arm[1]->piradToPosition( abs(sin(nxt)) );
+//    arm[1]->piradToPosition( pirad_arm[1] );     
+//	center = space->getScreenPosition(arm[1]->center.x,arm[1]->center.y);
+//	node = space->getScreenPosition(arm[1]->arc_position.x,arm[1]->arc_position.y);
 //    ofSetHexColor(0x00FF77);
-//    checkIntersect(circle2);
+//    checkIntersect(arm[1]);
 //    ofLine(center.x,center.y,node.x,node.y);
 //
-//    // circle3->piradToPosition( abs(sin(nxt)) );
-//    circle3->piradToPosition( pirad_circle3 );     
-//    center = space->getScreenPosition(circle3->center.x,circle3->center.y);
-//    node = space->getScreenPosition(circle3->arc_position.x,circle3->arc_position.y);
+//    // arm[2]->piradToPosition( abs(sin(nxt)) );
+//    arm[2]->piradToPosition( pirad_arm[2] );     
+//    center = space->getScreenPosition(arm[2]->center.x,arm[2]->center.y);
+//    node = space->getScreenPosition(arm[2]->arc_position.x,arm[2]->arc_position.y);
 //    ofSetHexColor(0x0000FF);
-//    checkIntersect(circle3);
+//    checkIntersect(arm[2]);
 //    ofLine(center.x,center.y,node.x,node.y);
 //
-//    // circle4->piradToPosition( abs(sin(nxt)) );
-//    circle4->piradToPosition( pirad_circle4 );     
-//    center = space->getScreenPosition(circle4->center.x,circle4->center.y);
-//    node = space->getScreenPosition(circle4->arc_position.x,circle4->arc_position.y);
+//    // arm[3]->piradToPosition( abs(sin(nxt)) );
+//    arm[3]->piradToPosition( pirad_arm[3] );     
+//    center = space->getScreenPosition(arm[3]->center.x,arm[3]->center.y);
+//    node = space->getScreenPosition(arm[3]->arc_position.x,arm[3]->arc_position.y);
 //    ofSetHexColor(0xFFFF00);
-//    checkIntersect(circle4);
+//    checkIntersect(arm[3]);
 //    ofLine(center.x,center.y,node.x,node.y);
 //   
     
@@ -218,9 +223,10 @@ void ofApp::dragEvent(ofDragInfo dragInfo){
 
 }
 
+//--------------------------------------------------------------
 bool ofApp::checkIntersect(slCircular *target){
 
-	// if(target == circle2)ofSetHexColor(0xFFFFFF);
+	// if(target == arm[1])ofSetHexColor(0xFFFFFF);
 
 	slCircular* another;
 
@@ -229,19 +235,19 @@ bool ofApp::checkIntersect(slCircular *target){
 		switch (i){
 
 			case 0:
-				another = circle1;
+				another = arm[0];
 				break;
 
 			case 1:
-				another = circle2;
+				another = arm[1];
 				break;
 
 			case 2:
-				another = circle3;			
+				another = arm[2];			
 				break;
 
 			case 3:
-				another = circle4;			
+				another = arm[3];			
 				break;
 
 			default:
@@ -270,6 +276,60 @@ bool ofApp::checkIntersect(slCircular *target){
 }
 
 
+
+//--------------------------------------------------------------
+void ofApp::addAgents(){
+    
+    //SetUp Agents
+    agent ag1;
+    ag1.view = 0.3;
+    ag1.strength = 50;
+    ag1.dexterity = 50;
+    ag1.hp = 0.5;
+    ag1.circumference_posi = -1.0f;
+    ag1.posi.x = 0.138;
+    ag1.posi.y = 0.139;
+    model->addAgent(&ag1);
+    
+    agent ag2;
+    ag2.view = 0.3;
+    ag2.strength = 50;
+    ag2.dexterity = 50;
+    ag2.hp = 0.5;
+    ag2.circumference_posi = -1.0f;
+    ag2.posi.x = 0.138;
+    ag2.posi.y = 0.139;
+    model->addAgent(&ag2);
+    
+    agent ag3;
+    ag3.view = 0.3;
+    ag3.strength = 50;
+    ag3.dexterity = 50;
+    ag3.hp = 0.5;
+    ag3.circumference_posi = -1.0f;
+    ag3.posi.x = 0.;
+    ag3.posi.y = 0.;
+    model->addAgent(&ag3);
+    
+    agent ag4;
+    ag4.view = 0.3;
+    ag4.strength = 50;
+    ag4.dexterity = 50;
+    ag4.hp = 0.5;
+    ag4.circumference_posi = -1.0f;
+    ag4.posi.x = 1.;
+    ag4.posi.y = 1.;
+    model->addAgent(&ag4);
+    
+ 
+    this->syncPositions();
+    
+}
+
+
+
+//--------------------------------------------------------------
+
 void ofApp::sendData(){
 
     ofxOscMessage m;
@@ -278,6 +338,7 @@ void ofApp::sendData(){
     server.sendMessage(m);
 
 }
+//--------------------------------------------------------------
 
 void ofApp::listenOsc(){
 
@@ -295,32 +356,27 @@ void ofApp::listenOsc(){
 		receiver.getNextMessage(&m);
         
 
-		//Message for circle1
+		//Message for arm[0]
 		if(m.getAddress() == "/circleControl"){
             
-            
-            float *length;
             slCircular* circle;
+            agent ag;
             
 			string target = m.getArgAsString(0); //Get the 2nd address
-			if(target=="/circle1"){
-				length = &pirad_circle1;
-				circle = circle1;
-			}
-			else if (target =="/circle2"){
-				length = &pirad_circle2;
-				circle = circle2;
-			}
-            else if (target =="/circle3"){
-                length = &pirad_circle3;
-                circle = circle3;
-            }
-            else if (target =="/circle4"){
-                length = &pirad_circle4;
-                circle = circle4;
-            }
-            
-			*length = m.getArgAsFloat(1);
+            int target_id;
+            if(target=="/circle1") target_id = 0;
+			else if (target =="/circle2")target_id = 1;
+            else if (target =="/circle3")target_id = 2;
+            else if (target =="/circle4")target_id = 3;
+
+            //Set target arm and agent
+            circle = arm[target_id];
+            ag = model->getAgent(target_id);
+
+            //Set agent position
+            ag.circumference_posi = (float)scale(m.getArgAsFloat(1), 1., 0., 1., -1.);
+            model->setAgent(target_id, &ag);
+            cout << ag.circumference_posi << endl;
 			if( m.getArgAsFloat(2) != 0.) circle->radius = m.getArgAsFloat(2);
 
 		}
@@ -355,4 +411,26 @@ void ofApp::listenOsc(){
 			msg_strings[current_msg_string] = "";
 		}
 	}
+}
+
+
+
+void ofApp::syncPosition(int ag_id){
+    
+    agent ag = model->getAgent(ag_id);
+    
+    //Scale Agent position into pirad
+    double pirad = scale(ag.circumference_posi, 1., -1., 1., 0.);
+    //Set the arm position with piRad, then, set the eucrid arm position to agent
+    ag.posi = arm[ag_id]->piradToPosition( (float)pirad );
+    model->setAgent(ag_id, &ag);
+    
+}
+
+void ofApp::syncPositions(){
+    
+    //Sync the agent position into arm position
+    for(int i; i<ARM_NUM; i++) this->syncPosition(i);
+
+    
 }
