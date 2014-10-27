@@ -4,12 +4,18 @@
 #define SCREEN_HEIGHT 768
 #define FONT_SIZE_MODIFY 7. //For dispray on center of Square
 
+//System
+#define ARM_NUM 4
+
+
 //Define for OSC to Receive
 #define PORT 58137
 #define NUM_MSG_STRINGS 20
 //Define for OSC to Send
 //#define SENDER_HOST "49.212.138.54"
 //#define SENDER_PORT 57122
+
+//For FIS
 #define SENDER_HOST "127.0.0.1"
 #define SENDER_PORT 58137
 
@@ -18,11 +24,18 @@
 #include "ofxOsc.h"
 #include "slCircular.h"
 #include "slEuclid.h"
-//#include "slMetro.h"
-#include "gismodel.h"
-#include "tools.h"
+#include "slCellModel.h"
+#include "slMetro.h"
 #include "DigitalFis.h"
 
+
+typedef struct system_t {
+
+    int fps;
+    int reset_flg;
+    int stop_flg;
+    
+}system_t;
 
 
 class ofApp : public ofBaseApp{
@@ -42,7 +55,8 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
-    
+        system_t system;
+        slCellModel *model;
 //        slMetro *metro;
     
     	//OSC Receive
@@ -54,39 +68,44 @@ class ofApp : public ofBaseApp{
     
 
     private:
-    	Gismodel gismodel;
+
+        //OSC
         ofxOscSender server;
     
-    	ToolKit toolKit;
+        //Utilities
+        slMetro *metro;
+        //Fis
     	DigitalFis digitalFis;
-        slCircular* circle1;
-        slCircular* circle2;
-        slCircular* circle3;
-        slCircular* circle4;
+    
+        //Drawing Arm
+        slEuclid* space;
+        float pirad;
+        slCircular* arm[ARM_NUM];
         float pirad_circle1;
        	float pirad_circle2;
        	float pirad_circle3;
        	float pirad_circle4;
-
-        slEuclid* space;
-		float pirad;
     
-		//System
-	    int reset_flg; //Init reset flag
-	    int stop_flg; // Init stop flag
+		//System Variables
+//	    int reset_flg; //Init reset flag
+//	    int stop_flg; // Init stop flag
 	    int agent_count;
+        ToolKit toolKit;
         //Font
         ofTrueTypeFont	dekar;
     
-
-	    //Agent
-         unsigned long seeds[SEED_ARRAY_MAX];
-	     string seed_names[SEED_ARRAY_MAX];
-	     float 	counter;
-
+        //Agent (model level)
+        void addAgents();
+    
+	    //Agent (drawing level)
+        float counter;
 		bool checkIntersect(slCircular *target);
 		void setupSeeds();
 		void displayAgents();
 		void listenOsc();
+    
+        //Bridge Graphic and Model
+        void syncPosition(int ag_id);
+        void syncPositions();
     
 };
