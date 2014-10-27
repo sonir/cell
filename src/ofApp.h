@@ -6,7 +6,8 @@
 
 //System
 #define ARM_NUM 4
-#define STEP_INTERVAL 0.4f
+#define STEP_INTERVAL 0.2f
+#define SENDING_INTERVAL 5.0f
 
 //Define for OSC to Receive
 #define PORT 58137
@@ -74,6 +75,7 @@ class ofApp : public ofBaseApp{
     
         //Utilities
         slMetro *timerAgentStep;
+        slMetro *timerSendingParameters;
         //Fis
     	DigitalFis digitalFis;
     

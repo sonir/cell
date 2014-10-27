@@ -9,6 +9,7 @@ void ofApp::setup(){
     //System Setup
     system.fps = 60;
     timerAgentStep = new slMetro(STEP_INTERVAL);
+    timerSendingParameters = new slMetro(SENDING_INTERVAL);
     
     //Font Setup
     ofTrueTypeFont::setGlobalDpi(72);
@@ -62,6 +63,7 @@ void ofApp::update(){
 //        model->cycle();
     }
 
+    if(timerSendingParameters->alart())cout << "sending sound params" << endl;
     sendData();
 	listenOsc();
     
