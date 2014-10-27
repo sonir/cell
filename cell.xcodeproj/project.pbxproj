@@ -51,14 +51,12 @@
 		E7E077E515D3B63C0020DFD4 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E415D3B63C0020DFD4 /* CoreVideo.framework */; };
 		E7E077E815D3B6510020DFD4 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7E077E715D3B6510020DFD4 /* QTKit.framework */; };
 		E7F985F815E0DEA3003869B5 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F985F515E0DE99003869B5 /* Accelerate.framework */; };
+		F248BFAC19FEA5BD00757B40 /* cellModelDataFoundation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F248BF8E19FEA5BC00757B40 /* cellModelDataFoundation.cpp */; };
+		F248BFAD19FEA5BD00757B40 /* slCellModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F248BF9019FEA5BC00757B40 /* slCellModel.cpp */; };
+		F248BFAE19FEA5BD00757B40 /* Toolkit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F248BF9319FEA5BC00757B40 /* Toolkit.cpp */; };
 		F285EB3169F1566CA3D93C20 /* ofxPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E112B3AEBEA2C091BF2B40AE /* ofxPanel.cpp */; };
 		F2A275FF19FAEDF000371500 /* slCircular.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2A2755719FAEDF000371500 /* slCircular.cpp */; };
 		F2A2761719FAEDF100371500 /* slEuclid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2A2759819FAEDF000371500 /* slEuclid.cpp */; };
-		F2A2762F19FAEDF100371500 /* gismodel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2A275DB19FAEDF000371500 /* gismodel.cpp */; };
-		F2A2763019FAEDF100371500 /* gismoEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2A275DE19FAEDF000371500 /* gismoEngine.cpp */; };
-		F2A2763119FAEDF100371500 /* gismoExtensions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2A275E019FAEDF000371500 /* gismoExtensions.cpp */; };
-		F2A2763219FAEDF100371500 /* gismoFoundation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2A275E219FAEDF000371500 /* gismoFoundation.cpp */; };
-		F2A2763319FAEDF100371500 /* toolkit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2A275E619FAEDF000371500 /* toolkit.cpp */; };
 		F2A2763619FAEE7500371500 /* DigitalFis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2A2763419FAEE7500371500 /* DigitalFis.cpp */; };
 /* End PBXBuildFile section */
 
@@ -170,29 +168,20 @@
 		E7E077E715D3B6510020DFD4 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
 		E7F985F515E0DE99003869B5 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = /System/Library/Frameworks/Accelerate.framework; sourceTree = "<absolute>"; };
 		ECF8674C7975F1063C5E30CA /* ofxGuiGroup.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxGuiGroup.cpp; path = ../../../addons/ofxGui/src/ofxGuiGroup.cpp; sourceTree = SOURCE_ROOT; };
+		F248BF8E19FEA5BC00757B40 /* cellModelDataFoundation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cellModelDataFoundation.cpp; sourceTree = "<group>"; };
+		F248BF8F19FEA5BC00757B40 /* cellModelDataFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cellModelDataFoundation.h; sourceTree = "<group>"; };
+		F248BF9019FEA5BC00757B40 /* slCellModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = slCellModel.cpp; sourceTree = "<group>"; };
+		F248BF9119FEA5BC00757B40 /* slCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slCellModel.h; sourceTree = "<group>"; };
+		F248BF9219FEA5BC00757B40 /* slCellModelSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slCellModelSetup.h; sourceTree = "<group>"; };
+		F248BF9319FEA5BC00757B40 /* Toolkit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Toolkit.cpp; sourceTree = "<group>"; };
+		F248BF9419FEA5BC00757B40 /* Toolkit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Toolkit.h; sourceTree = "<group>"; };
 		F2A2755619FAEDF000371500 /* slCircular 2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "slCircular 2.h"; sourceTree = "<group>"; };
 		F2A2755719FAEDF000371500 /* slCircular.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = slCircular.cpp; sourceTree = "<group>"; };
 		F2A2755819FAEDF000371500 /* slCircular.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slCircular.h; sourceTree = "<group>"; };
 		F2A2759819FAEDF000371500 /* slEuclid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = slEuclid.cpp; sourceTree = "<group>"; };
 		F2A2759919FAEDF000371500 /* slEuclid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slEuclid.h; sourceTree = "<group>"; };
-		F2A275D919FAEDF000371500 /* agent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = agent.h; sourceTree = "<group>"; };
-		F2A275DA19FAEDF000371500 /* agentSeed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = agentSeed.h; sourceTree = "<group>"; };
-		F2A275DB19FAEDF000371500 /* gismodel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gismodel.cpp; sourceTree = "<group>"; };
-		F2A275DC19FAEDF000371500 /* gismodel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gismodel.h; sourceTree = "<group>"; };
-		F2A275DD19FAEDF000371500 /* gismodelSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gismodelSetup.h; sourceTree = "<group>"; };
-		F2A275DE19FAEDF000371500 /* gismoEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gismoEngine.cpp; sourceTree = "<group>"; };
-		F2A275DF19FAEDF000371500 /* gismoEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gismoEngine.h; sourceTree = "<group>"; };
-		F2A275E019FAEDF000371500 /* gismoExtensions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gismoExtensions.cpp; sourceTree = "<group>"; };
-		F2A275E119FAEDF000371500 /* gismoExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gismoExtensions.h; sourceTree = "<group>"; };
-		F2A275E219FAEDF000371500 /* gismoFoundation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gismoFoundation.cpp; sourceTree = "<group>"; };
-		F2A275E319FAEDF000371500 /* gismoFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gismoFoundation.h; sourceTree = "<group>"; };
-		F2A275E419FAEDF000371500 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
-		F2A275E519FAEDF000371500 /* testClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testClass.h; sourceTree = "<group>"; };
-		F2A275E619FAEDF000371500 /* toolkit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = toolkit.cpp; sourceTree = "<group>"; };
-		F2A275E719FAEDF000371500 /* toolkit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = toolkit.h; sourceTree = "<group>"; };
 		F2A2763419FAEE7500371500 /* DigitalFis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DigitalFis.cpp; sourceTree = "<group>"; };
 		F2A2763519FAEE7500371500 /* DigitalFis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitalFis.h; sourceTree = "<group>"; };
-		F2A2763719FAEE8300371500 /* tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tools.h; sourceTree = "<group>"; };
 		F4F5B6B8BA2BD52C646ED908 /* OscException.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = OscException.h; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscException.h; sourceTree = SOURCE_ROOT; };
 		F7FBC56859535E597B24BB91 /* NetworkingUtils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = NetworkingUtils.h; path = ../../../addons/ofxOsc/libs/oscpack/src/ip/NetworkingUtils.h; sourceTree = SOURCE_ROOT; };
 		FC5DA1C87211D4F6377DA719 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = tinyxmlparser.cpp; path = ../../../addons/ofxXmlSettings/libs/tinyxmlparser.cpp; sourceTree = SOURCE_ROOT; };
@@ -342,9 +331,9 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				F248BF4F19FEA5BC00757B40 /* slCellModel */,
 				F2A2751719FAEDF000371500 /* slCircular */,
 				F2A2755919FAEDF000371500 /* slEuclid */,
-				F2A2759A19FAEDF000371500 /* slGismodel */,
 				480A780D8D0308AE4A368801 /* ofxGui */,
 				E6053AB7FEC63D5F83825B88 /* ofxOsc */,
 				1F4FB5C423662B96ADFDCC0B /* ofxXmlSettings */,
@@ -442,7 +431,6 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				F2A2763719FAEE8300371500 /* tools.h */,
 				F2A2763419FAEE7500371500 /* DigitalFis.cpp */,
 				F2A2763519FAEE7500371500 /* DigitalFis.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
@@ -468,6 +456,29 @@
 				38871A5825686AE018EC2BF0 /* libs */,
 			);
 			name = ofxOsc;
+			sourceTree = "<group>";
+		};
+		F248BF4F19FEA5BC00757B40 /* slCellModel */ = {
+			isa = PBXGroup;
+			children = (
+				F248BF8D19FEA5BC00757B40 /* src */,
+			);
+			name = slCellModel;
+			path = ../../../addons/slCellModel;
+			sourceTree = "<group>";
+		};
+		F248BF8D19FEA5BC00757B40 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				F248BF8E19FEA5BC00757B40 /* cellModelDataFoundation.cpp */,
+				F248BF8F19FEA5BC00757B40 /* cellModelDataFoundation.h */,
+				F248BF9019FEA5BC00757B40 /* slCellModel.cpp */,
+				F248BF9119FEA5BC00757B40 /* slCellModel.h */,
+				F248BF9219FEA5BC00757B40 /* slCellModelSetup.h */,
+				F248BF9319FEA5BC00757B40 /* Toolkit.cpp */,
+				F248BF9419FEA5BC00757B40 /* Toolkit.h */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		F2A2751719FAEDF000371500 /* slCircular */ = {
@@ -503,37 +514,6 @@
 			children = (
 				F2A2759819FAEDF000371500 /* slEuclid.cpp */,
 				F2A2759919FAEDF000371500 /* slEuclid.h */,
-			);
-			path = src;
-			sourceTree = "<group>";
-		};
-		F2A2759A19FAEDF000371500 /* slGismodel */ = {
-			isa = PBXGroup;
-			children = (
-				F2A275D819FAEDF000371500 /* src */,
-			);
-			name = slGismodel;
-			path = ../../../addons/slGismodel;
-			sourceTree = "<group>";
-		};
-		F2A275D819FAEDF000371500 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				F2A275D919FAEDF000371500 /* agent.h */,
-				F2A275DA19FAEDF000371500 /* agentSeed.h */,
-				F2A275DB19FAEDF000371500 /* gismodel.cpp */,
-				F2A275DC19FAEDF000371500 /* gismodel.h */,
-				F2A275DD19FAEDF000371500 /* gismodelSetup.h */,
-				F2A275DE19FAEDF000371500 /* gismoEngine.cpp */,
-				F2A275DF19FAEDF000371500 /* gismoEngine.h */,
-				F2A275E019FAEDF000371500 /* gismoExtensions.cpp */,
-				F2A275E119FAEDF000371500 /* gismoExtensions.h */,
-				F2A275E219FAEDF000371500 /* gismoFoundation.cpp */,
-				F2A275E319FAEDF000371500 /* gismoFoundation.h */,
-				F2A275E419FAEDF000371500 /* readme.txt */,
-				F2A275E519FAEDF000371500 /* testClass.h */,
-				F2A275E619FAEDF000371500 /* toolkit.cpp */,
-				F2A275E719FAEDF000371500 /* toolkit.h */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -641,28 +621,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
-				F2A2763019FAEDF100371500 /* gismoEngine.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				856AA354D08AB4B323081444 /* ofxBaseGui.cpp in Sources */,
 				F2A275FF19FAEDF000371500 /* slCircular.cpp in Sources */,
-				F2A2763119FAEDF100371500 /* gismoExtensions.cpp in Sources */,
 				5CBB2AB3A60F65431D7B555D /* ofxButton.cpp in Sources */,
 				B266578FC55D23BFEBC042E7 /* ofxGuiGroup.cpp in Sources */,
 				483908258D00B98B4BE69F07 /* ofxLabel.cpp in Sources */,
 				F285EB3169F1566CA3D93C20 /* ofxPanel.cpp in Sources */,
-				F2A2763219FAEDF100371500 /* gismoFoundation.cpp in Sources */,
 				837220E80EB56CD44AD27F2A /* ofxSlider.cpp in Sources */,
 				B56FE57CC35806596D38118C /* ofxSliderGroup.cpp in Sources */,
-				F2A2763319FAEDF100371500 /* toolkit.cpp in Sources */,
 				1CD33E884D9E3358252E82A1 /* ofxToggle.cpp in Sources */,
 				72A929D3561B8232A182ABFC /* ofxOscBundle.cpp in Sources */,
 				5864AD82E20F15536D054EA3 /* ofxOscMessage.cpp in Sources */,
+				F248BFAD19FEA5BD00757B40 /* slCellModel.cpp in Sources */,
 				4ADB88E2FB52E76A471065DE /* ofxOscParameterSync.cpp in Sources */,
 				640279EE111671BD026CB013 /* ofxOscReceiver.cpp in Sources */,
-				F2A2762F19FAEDF100371500 /* gismodel.cpp in Sources */,
 				8F5205AEF8861EF234F0651A /* ofxOscSender.cpp in Sources */,
 				ADE367465D2A8EBAD4C7A8D9 /* IpEndpointName.cpp in Sources */,
 				67FE4C7B15C2F0478C8126C2 /* NetworkingUtils.cpp in Sources */,
+				F248BFAE19FEA5BD00757B40 /* Toolkit.cpp in Sources */,
 				510CAFE035E576A4E1502D52 /* UdpSocket.cpp in Sources */,
 				A29D8C96AE042ECEAA1BD4F3 /* NetworkingUtilsWin.cpp in Sources */,
 				28090DEB5109115003E8F1C5 /* UdpSocketWin.cpp in Sources */,
@@ -670,6 +647,7 @@
 				F2A2761719FAEDF100371500 /* slEuclid.cpp in Sources */,
 				C4782ECC372420ACE0615B74 /* OscPrintReceivedElements.cpp in Sources */,
 				0546D1A38E13BD319CC9755B /* OscReceivedElements.cpp in Sources */,
+				F248BFAC19FEA5BD00757B40 /* cellModelDataFoundation.cpp in Sources */,
 				879A251454401BC0B6E4F238 /* OscTypes.cpp in Sources */,
 				63B57AC5BF4EF088491E0317 /* ofxXmlSettings.cpp in Sources */,
 				933A2227713C720CEFF80FD9 /* tinyxml.cpp in Sources */,
@@ -903,6 +881,13 @@
 					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slGismodel/libs/necessaryLib/lib/linux64,
 					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slGismodel/libs/necessaryLib/lib/osx,
 					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slGismodel/libs/necessaryLib/lib/win_cb,
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slCellModel/libs/necessaryLib/lib/android/armeabi,
+					"/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slCellModel/libs/necessaryLib/lib/android/armeabi-v7a",
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slCellModel/libs/necessaryLib/lib/ios,
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slCellModel/libs/necessaryLib/lib/linux,
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slCellModel/libs/necessaryLib/lib/linux64,
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slCellModel/libs/necessaryLib/lib/osx,
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slCellModel/libs/necessaryLib/lib/win_cb,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
 				WRAPPER_EXTENSION = app;
@@ -1030,6 +1015,13 @@
 					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slGismodel/libs/necessaryLib/lib/linux64,
 					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slGismodel/libs/necessaryLib/lib/osx,
 					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slGismodel/libs/necessaryLib/lib/win_cb,
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slCellModel/libs/necessaryLib/lib/android/armeabi,
+					"/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slCellModel/libs/necessaryLib/lib/android/armeabi-v7a",
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slCellModel/libs/necessaryLib/lib/ios,
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slCellModel/libs/necessaryLib/lib/linux,
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slCellModel/libs/necessaryLib/lib/linux64,
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slCellModel/libs/necessaryLib/lib/osx,
+					/Users/sonir/Documents/boxes/dev_box/of_v0.8.4_osx_release/addons/slCellModel/libs/necessaryLib/lib/win_cb,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

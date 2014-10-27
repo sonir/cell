@@ -18,11 +18,16 @@
 #include "ofxOsc.h"
 #include "slCircular.h"
 #include "slEuclid.h"
+#include "slCellModel.h"
 //#include "slMetro.h"
-#include "gismodel.h"
-#include "tools.h"
 #include "DigitalFis.h"
 
+
+typedef struct system_t {
+
+    int fps;
+    
+}system_t;
 
 
 class ofApp : public ofBaseApp{
@@ -42,7 +47,7 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
-    
+        system_t system;
 //        slMetro *metro;
     
     	//OSC Receive
@@ -54,10 +59,8 @@ class ofApp : public ofBaseApp{
     
 
     private:
-    	Gismodel gismodel;
         ofxOscSender server;
     
-    	ToolKit toolKit;
     	DigitalFis digitalFis;
         slCircular* circle1;
         slCircular* circle2;
@@ -75,13 +78,12 @@ class ofApp : public ofBaseApp{
 	    int reset_flg; //Init reset flag
 	    int stop_flg; // Init stop flag
 	    int agent_count;
+        ToolKit toolKit;
         //Font
         ofTrueTypeFont	dekar;
     
 
 	    //Agent
-         unsigned long seeds[SEED_ARRAY_MAX];
-	     string seed_names[SEED_ARRAY_MAX];
 	     float 	counter;
 
 		bool checkIntersect(slCircular *target);
