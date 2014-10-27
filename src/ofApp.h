@@ -6,7 +6,7 @@
 
 //System
 #define ARM_NUM 4
-
+#define STEP_INTERVAL 0.4f
 
 //Define for OSC to Receive
 #define PORT 58137
@@ -34,6 +34,7 @@ typedef struct system_t {
     int fps;
     int reset_flg;
     int stop_flg;
+    int step_count;
     
 }system_t;
 
@@ -57,7 +58,6 @@ class ofApp : public ofBaseApp{
 
         system_t system;
         slCellModel *model;
-//        slMetro *metro;
     
     	//OSC Receive
 		ofxOscReceiver receiver;
@@ -73,7 +73,7 @@ class ofApp : public ofBaseApp{
         ofxOscSender server;
     
         //Utilities
-        slMetro *metro;
+        slMetro *timerAgentStep;
         //Fis
     	DigitalFis digitalFis;
     
@@ -87,8 +87,6 @@ class ofApp : public ofBaseApp{
        	float pirad_circle4;
     
 		//System Variables
-//	    int reset_flg; //Init reset flag
-//	    int stop_flg; // Init stop flag
 	    int agent_count;
         ToolKit toolKit;
         //Font

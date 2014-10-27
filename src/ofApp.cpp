@@ -8,7 +8,7 @@ void ofApp::setup(){
     
     //System Setup
     system.fps = 60;
-    metro = new slMetro(1.0f);
+    timerAgentStep = new slMetro(STEP_INTERVAL);
     
     //Font Setup
     ofTrueTypeFont::setGlobalDpi(72);
@@ -17,6 +17,7 @@ void ofApp::setup(){
 	//APP Setup
     system.reset_flg = 0; //Init reset flag
     system.stop_flg = 1; // Init stop flag
+    system.step_count = 0;
     int ofSetFrameRate(system.fps); //Setup Frame Rate
     if(false)toolKit.dice(6); //No meaning code to avoid "Unused" warning.
     
@@ -47,14 +48,19 @@ void ofApp::setup(){
 void ofApp::update(){
 
 
-    //if(metro->alart())cout << "foo" << endl;
-    
+
     //Reset check for Mutex
     if(system.reset_flg){
         system.reset_flg = 0;
     }        
     //Do Agent Cycle
-    if(!system.stop_flg) model->cycle();
+    if(!system.stop_flg){
+        
+        if(timerAgentStep->alart())model->stroke(system.step_count);
+        system.step_count++;
+        if(system.step_count>=ARM_NUM)system.step_count=0;
+//        model->cycle();
+    }
 
     sendData();
 	listenOsc();

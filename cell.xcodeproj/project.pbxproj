@@ -184,6 +184,7 @@
 		F2A2759919FAEDF000371500 /* slEuclid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slEuclid.h; sourceTree = "<group>"; };
 		F2A2763419FAEE7500371500 /* DigitalFis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DigitalFis.cpp; sourceTree = "<group>"; };
 		F2A2763519FAEE7500371500 /* DigitalFis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DigitalFis.h; sourceTree = "<group>"; };
+		F2A8507A19FF0AF300100FA5 /* armControl.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = armControl.app; sourceTree = "<group>"; };
 		F4F5B6B8BA2BD52C646ED908 /* OscException.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = OscException.h; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscException.h; sourceTree = SOURCE_ROOT; };
 		F7FBC56859535E597B24BB91 /* NetworkingUtils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = NetworkingUtils.h; path = ../../../addons/ofxOsc/libs/oscpack/src/ip/NetworkingUtils.h; sourceTree = SOURCE_ROOT; };
 		FC5DA1C87211D4F6377DA719 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = tinyxmlparser.cpp; path = ../../../addons/ofxXmlSettings/libs/tinyxmlparser.cpp; sourceTree = SOURCE_ROOT; };
@@ -333,8 +334,8 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
-				F20F6E8219FEF72A00937ACF /* slMetro */,
 				F248BF4F19FEA5BC00757B40 /* slCellModel */,
+				F20F6E8219FEF72A00937ACF /* slMetro */,
 				F2A2751719FAEDF000371500 /* slCircular */,
 				F2A2755919FAEDF000371500 /* slEuclid */,
 				480A780D8D0308AE4A368801 /* ofxGui */,
@@ -421,6 +422,7 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
+				F2A8507A19FF0AF300100FA5 /* armControl.app */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
