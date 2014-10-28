@@ -18,7 +18,7 @@ DroneServer::DroneServer(){
 
 
 void DroneServer::send(){
-    
+//    initParam(&drone_param);
     ofxOscMessage m;
     m.setAddress("/drone");
     m.addIntArg(drone_param.twitter_announce);
@@ -55,23 +55,28 @@ void DroneServer::send(){
     
 }
 
+void DroneServer::send(drone_mes_t getParams){
+    drone_param = getParams;
+    this->send();
+}
+
 void DroneServer::initParam(drone_mes_t *pDrone){
 
     pDrone->twitter_announce = 0;
     pDrone->twitter_log = 0;
-    pDrone->synth_pitch1_vol = 1.0f;
-    pDrone->synth_pitch2_vol = 1.0f;
-    pDrone->synth_pitch3_vol = 1.0f;
-    pDrone->synth_pitch4_vol = 1.0f;
-    pDrone->synth_pitch5_vol = 1.0f;
-    pDrone->synth_pitch6_vol = 1.0f;
-    pDrone->synth_pitch7_vol = 1.0f;
-    pDrone->synth_pitch8_vol = 1.0f;
-    pDrone->synth_pitch9_vol = 1.0f;
-    pDrone->synth_pitch10_vol = 1.0f;
-    pDrone->synth_pitch11_vol = 1.0f;
-    pDrone->synth_pitch12_vol = 1.0f;
-    pDrone->synth_pitch13_vol = 1.0f;
+    pDrone->synth_pitch1_vol = 0.4f;
+    pDrone->synth_pitch2_vol = 0.4f;
+    pDrone->synth_pitch3_vol = 0.4f;
+    pDrone->synth_pitch4_vol = 0.4f;
+    pDrone->synth_pitch5_vol = 0.4f;
+    pDrone->synth_pitch6_vol = 0.4f;
+    pDrone->synth_pitch7_vol = 0.4f;
+    pDrone->synth_pitch8_vol = 0.4f;
+    pDrone->synth_pitch9_vol = 0.4f;
+    pDrone->synth_pitch10_vol = 0.4f;
+    pDrone->synth_pitch11_vol = 0.4f;
+    pDrone->synth_pitch12_vol = 0.4f;
+    pDrone->synth_pitch13_vol = 0.4f;
     pDrone->degrade_on= 0;
     pDrone->degrade_sample_rate = 1.0f;
     pDrone->vocoder_on = 0;

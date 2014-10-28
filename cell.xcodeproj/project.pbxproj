@@ -173,6 +173,10 @@
 		ECF8674C7975F1063C5E30CA /* ofxGuiGroup.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxGuiGroup.cpp; path = ../../../addons/ofxGui/src/ofxGuiGroup.cpp; sourceTree = SOURCE_ROOT; };
 		F20F6EC119FEF72A00937ACF /* slMetro.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = slMetro.cpp; sourceTree = "<group>"; };
 		F20F6EC219FEF72A00937ACF /* slMetro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slMetro.h; sourceTree = "<group>"; };
+		F221066F1A003CBB00720053 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		F22106701A003CBB00720053 /* Dekar.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Dekar.otf; sourceTree = "<group>"; };
+		F22106711A003CBB00720053 /* frabk.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = frabk.ttf; sourceTree = "<group>"; };
+		F22106721A003CBB00720053 /* verdana.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = verdana.ttf; sourceTree = "<group>"; };
 		F248BF8E19FEA5BC00757B40 /* cellModelDataFoundation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cellModelDataFoundation.cpp; sourceTree = "<group>"; };
 		F248BF8F19FEA5BC00757B40 /* cellModelDataFoundation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cellModelDataFoundation.h; sourceTree = "<group>"; };
 		F248BF9019FEA5BC00757B40 /* slCellModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = slCellModel.cpp; sourceTree = "<group>"; };
@@ -190,6 +194,7 @@
 		F2A48D5619FFE60000E73AC2 /* SoundManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SoundManager.cpp; sourceTree = "<group>"; };
 		F2A48D5719FFE60100E73AC2 /* SoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundManager.h; sourceTree = "<group>"; };
 		F2A48D591A00027A00E73AC2 /* testWithServer.webloc */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = testWithServer.webloc; sourceTree = "<group>"; };
+		F2A48D5A1A001B9A00E73AC2 /* web_osc_test.webloc */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = web_osc_test.webloc; sourceTree = "<group>"; };
 		F2A8507A19FF0AF300100FA5 /* armControl.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = armControl.app; sourceTree = "<group>"; };
 		F2A8507B19FF14D400100FA5 /* DroneServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DroneServer.cpp; sourceTree = "<group>"; };
 		F2A8507C19FF14D400100FA5 /* DroneServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroneServer.h; sourceTree = "<group>"; };
@@ -430,11 +435,13 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
+				F2A48D5A1A001B9A00E73AC2 /* web_osc_test.webloc */,
 				F2A48D591A00027A00E73AC2 /* testWithServer.webloc */,
 				F2A8507A19FF0AF300100FA5 /* armControl.app */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
+				F221066E1A003CBB00720053 /* data */,
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
 				BB4B014C10F69532006C3DED /* addons */,
 				E45BE5980E8CC70C009D7055 /* frameworks */,
@@ -493,6 +500,18 @@
 				F20F6EC219FEF72A00937ACF /* slMetro.h */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		F221066E1A003CBB00720053 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				F221066F1A003CBB00720053 /* .gitkeep */,
+				F22106701A003CBB00720053 /* Dekar.otf */,
+				F22106711A003CBB00720053 /* frabk.ttf */,
+				F22106721A003CBB00720053 /* verdana.ttf */,
+			);
+			name = data;
+			path = bin/data;
 			sourceTree = "<group>";
 		};
 		F248BF4F19FEA5BC00757B40 /* slCellModel */ = {

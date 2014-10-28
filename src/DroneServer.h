@@ -57,6 +57,7 @@ class DroneServer{
 		drone_mes_t drone_param;
         void initParam(drone_mes_t *pDrone);
         void send();
+        void send(drone_mes_t getParams);
     
 };
 

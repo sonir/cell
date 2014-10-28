@@ -13,16 +13,17 @@
 //System
 #define ARM_NUM 4
 //System Timers
-#define STEP_INTERVAL 0.2f
-#define SENDING_INTERVAL 5.0f
+#define STEP_INTERVAL 0.2f //0.2f
+#define STEP_INTERVAL_NORMAL_MODE 0.15f
+#define SENDING_INTERVAL 10.0f //5.0f
+//Modes
+#define DEFAULT_STOP_FLG 1
+#define DEFAULT_CLOCK_MODE 1
+
 
 //Define for OSC to Receive
 #define PORT 58137
 #define NUM_MSG_STRINGS 20
-
-//Define for OSC to Send
-//#define SENDER_HOST "49.212.138.54"
-//#define SENDER_PORT 57122
 
 //ScreenSetup
 #define SCREEN_WIDTH  768//1024
@@ -40,11 +41,11 @@
 #define LEFT_OFFSET_FOR_PRAM 620
 #define PARAMETER_SPC 70
 #define LINE_HEIGHT 30
-#define LINE_HEIGHT_BODY 15
+#define LINE_HEIGHT_BODY 15.0f
 #define DISP_TITLE "CELL Operation Sytem Ver0.3"
 #define MESSAGE1 "SPC : START SIMULATOR"
 #define SENDIG_MES "connect with drone server"
-#define SENDIG_BLINK "OSC SENDING"
+#define LB_MOVE_MODE1 "clock mode"
 //Label
 #define LB_AGENT_ID "AGENT-%d"
 #define LB_VIEW "VIEW"

@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-void ofApp::setup(){    
+void ofApp::setup(){
 
     //Instanciate Model
     model = new slCellModel(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -15,12 +15,15 @@ void ofApp::setup(){
     ofTrueTypeFont::setGlobalDpi(72);
     h1.loadFont("Dekar.otf", 30, true, true);
     h2.loadFont("Dekar.otf", 18, true, true);
+//    h1.loadFont("verdana.ttf", 30, true, true);
+//    h2.loadFont("verdana.ttf", 18, true, true);
     body.loadFont("frabk.ttf", 12, false, true);
     // body.loadFont("Dekar.otf", 16, true, true);
     
 	//APP Setup
     system.reset_flg = 0; //Init reset flag
-    system.stop_flg = 1; // Init stop flag
+    system.stop_flg = DEFAULT_STOP_FLG; // Init stop flag
+    system.clock_flg = DEFAULT_CLOCK_MODE;
     system.step_count = 0;
     system.sent_drone = 0;
     int ofSetFrameRate(system.fps); //Setup Frame Rate
@@ -62,18 +65,27 @@ void ofApp::update(){
     //Do Agent Cycle
     if(!system.stop_flg){
         
-        if(timerAgentStep->alart())model->stroke(system.step_count);
-        system.step_count++;
-        if(system.step_count>=ARM_NUM)system.step_count=0;
-//        model->cycle();
+        if(system.clock_flg){
+            //Clock Mode
+            if(timerAgentStep->alart()){
+                model->stroke(system.step_count);
+                system.step_count++;
+                if(system.step_count>=ARM_NUM)system.step_count=0;
+            }
+            
+        }else{ //Normal Mode
+            
+            if(timerAgentStep->alart())model->cycle();
+            
+        }
     }
 
     if(timerSendingParameters->alart()){
         //Send Now Agents States
-        snap.ag0 = model->getAgent(0);
-        snap.ag1 = model->getAgent(1);
-        snap.ag2 = model->getAgent(2);
-        snap.ag3 = model->getAgent(3);
+        snap.ag[0] = model->getAgent(0);
+        snap.ag[1] = model->getAgent(1);
+        snap.ag[2] = model->getAgent(2);
+        snap.ag[3] = model->getAgent(3);
         sound.update(snap);
         system.sent_drone = true;
     }
@@ -146,15 +158,17 @@ void ofApp::draw(){
     ofSetColor(255);
     //OSC Status
     ofSetColor(80);
-    body.drawString(SENDIG_MES, LEFT_OFFSET+15., SCREEN_HEIGHT-20.f);
+    body.drawString(SENDIG_MES, LEFT_OFFSET+15., SCREEN_HEIGHT-LINE_HEIGHT_BODY);
     ofSetColor(255);
     if(system.sent_drone){
         system.sent_drone = false;
         //ofRect(LEFT_OFFSET, SCREEN_HEIGHT-30.f, 10.f, 10.f);
-        body.drawString(SENDIG_MES, LEFT_OFFSET+15., SCREEN_HEIGHT-20.f);
+        body.drawString(SENDIG_MES, LEFT_OFFSET+15., SCREEN_HEIGHT-LINE_HEIGHT_BODY);
 
     }
-    ofSetColor(200);
+    if(system.clock_flg) ofSetColor(0, 150, 0);
+    else ofSetColor(0, 80, 0);
+    body.drawString(LB_MOVE_MODE1, LEFT_OFFSET+15., SCREEN_HEIGHT-(LINE_HEIGHT_BODY*2));
 
 }
 
@@ -215,6 +229,11 @@ void ofApp::keyReleased(int key){
     	system.stop_flg = ( (system.stop_flg-1)*(-1) ); //Invert the value
     } else if (key == 0x20){
     	system.stop_flg = ( (system.stop_flg-1)*(-1) ); //Invert the value
+    } else if (key == 'c'){
+        system.clock_flg = ( (system.clock_flg-1)*(-1) ); //Invert the value
+        //Set the interval
+        if(system.clock_flg) timerAgentStep->set(STEP_INTERVAL);
+        else timerAgentStep->set(STEP_INTERVAL_NORMAL_MODE);
     }
 
 }

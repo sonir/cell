@@ -9,8 +9,13 @@
 #ifndef __cell__SoundManager__
 #define __cell__SoundManager__
 
+//Sound Setup
+#define JUDGE_DEGRADER 0.7
+#define JUDGE_AUTOPAN 0.3
+
 #include <stdio.h>
 #include "DroneServer.h"
+#include "cellSetup.h"
 #include "slCellModel.h"
 #include "slEuclid.h"
 
@@ -25,7 +30,8 @@ class SoundManager {
     
     public:
         SoundManager();
-        bool degradeCheck();
+        int degradeCheck();
+        int autoPanCheck();
         void mappingToDrone();
         void update(agent_snap_t snap);
         DroneServer *droneServer;

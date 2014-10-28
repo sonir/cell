@@ -17,6 +17,7 @@ typedef struct system_t {
     int fps;
     int reset_flg;
     int stop_flg;
+    int clock_flg;
     int step_count;
     bool sent_drone;
     
