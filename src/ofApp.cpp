@@ -63,7 +63,10 @@ void ofApp::update(){
 //        model->cycle();
     }
 
-    if(timerSendingParameters->alart())cout << "sending sound params" << endl;
+    if(timerSendingParameters->alart()){
+        cout << "sending sound params" << endl;
+        droneServer.send();
+    }
     sendData();
 	listenOsc();
     

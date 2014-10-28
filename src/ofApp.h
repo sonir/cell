@@ -28,6 +28,7 @@
 #include "slCellModel.h"
 #include "slMetro.h"
 #include "DigitalFis.h"
+#include "DroneServer.h"
 
 
 typedef struct system_t {
@@ -72,6 +73,7 @@ class ofApp : public ofBaseApp{
 
         //OSC
         ofxOscSender server;
+        DroneServer droneServer;
     
         //Utilities
         slMetro *timerAgentStep;
