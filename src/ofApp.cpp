@@ -13,12 +13,16 @@ void ofApp::setup(){
     
     //Font Setup
     ofTrueTypeFont::setGlobalDpi(72);
-    dekar.loadFont("Dekar.otf", 20, true, true);
+    h1.loadFont("Dekar.otf", 30, true, true);
+    h2.loadFont("Dekar.otf", 18, true, true);
+    body.loadFont("frabk.ttf", 12, false, true);
+    // body.loadFont("Dekar.otf", 16, true, true);
     
 	//APP Setup
     system.reset_flg = 0; //Init reset flag
     system.stop_flg = 1; // Init stop flag
     system.step_count = 0;
+    system.sent_drone = 0;
     int ofSetFrameRate(system.fps); //Setup Frame Rate
     if(false)toolKit.dice(6); //No meaning code to avoid "Unused" warning.
     
@@ -64,8 +68,8 @@ void ofApp::update(){
     }
 
     if(timerSendingParameters->alart()){
-        cout << "sending sound params" << endl;
         droneServer.send();
+        system.sent_drone = true;
     }
     sendData();
 	listenOsc();
@@ -85,14 +89,13 @@ void ofApp::draw(){
     //Draw ARM1
     syncPosition(0);
     center = space->getScreenPosition(arm[0]->center.x,arm[0]->center.y);
-     // node = space->getScreenPosition(arm[0]->arc_position.x,arm[0]->arc_position.y);
-     node = space->getScreenPosition(arm[0]->arc_position.x,arm[0]->arc_position.y);
-     ofSetHexColor(0xFF0000);
-     if(checkIntersect(arm[0])){ //If the lines are crossing
-         digitalFis.flash(PF,(fis_color)toolKit.dice(3));
+    node = space->getScreenPosition(arm[0]->arc_position.x,arm[0]->arc_position.y);
+    ofSetHexColor(0xFF0000);
+    if(checkIntersect(arm[0])){ //If the lines are crossing
+        digitalFis.flash(PF,(fis_color)toolKit.dice(3));
          // digitalFis.flash(PF,(fis_color)getAgent.condition);
-     }
-     ofLine(center.x,center.y,node.x,node.y); //Change Line Color
+    }
+    ofLine(center.x,center.y,node.x,node.y); //Change Line Color
 
     //Draw ARM2
     syncPosition(1);
@@ -124,12 +127,73 @@ void ofApp::draw(){
      }
      ofLine(center.x,center.y,node.x,node.y);
 
-
     //Draw Fonts
+    float top_offset = TOP_OFFSET;
     ofSetColor(225);
-    dekar.drawString("SPC : START SIMULATOR", 30, 35);
+    h1.drawString(DISP_TITLE, LEFT_OFFSET, TOP_OFFSET);
+    h2.drawString(MESSAGE1, LEFT_OFFSET, top_offset+=LINE_HEIGHT);
+    top_offset = this->dispAgentParam(top_offset,0);
+    top_offset = this->dispAgentParam(top_offset,1);
+    top_offset = this->dispAgentParam(top_offset,2);
+    top_offset = this->dispAgentParam(top_offset,3);
+    ofSetColor(255);
+    //OSC Status
+    ofSetColor(80);
+    body.drawString(SENDIG_MES, LEFT_OFFSET+15., SCREEN_HEIGHT-20.f);
+    ofSetColor(255);
+    if(system.sent_drone){
+        system.sent_drone = false;
+        //ofRect(LEFT_OFFSET, SCREEN_HEIGHT-30.f, 10.f, 10.f);
+        body.drawString(SENDIG_MES, LEFT_OFFSET+15., SCREEN_HEIGHT-20.f);
+
+    }
+    ofSetColor(200);
+
+}
+
+float ofApp::dispAgentParam(float top_offset, int ag_id){
+
+    float ag_top;
+    char str_val[40]; //Create Label Str
+    agent ag = model->getAgent(ag_id); //Get Agent Param
     
+    //Agent
+    ofSetColor(0,205,0);
+    sprintf(str_val, LB_AGENT_ID, ag.id_num);
+    body.drawString(str_val, LEFT_OFFSET_FOR_PRAM,top_offset+=LINE_HEIGHT);
+    ag_top = top_offset;
+    ofSetColor(0,180,0);
+    body.drawString(LB_VIEW, LEFT_OFFSET_FOR_PRAM,top_offset+=LINE_HEIGHT_BODY);
+    body.drawString(LB_STRENGTH, LEFT_OFFSET_FOR_PRAM,top_offset+=LINE_HEIGHT_BODY);
+    body.drawString(LB_DEXTERYTY, LEFT_OFFSET_FOR_PRAM,top_offset+=LINE_HEIGHT_BODY);
+    body.drawString(LB_HP, LEFT_OFFSET_FOR_PRAM,top_offset+=LINE_HEIGHT_BODY);
+    ofSetColor(0,100,0);
+    body.drawString(LB_INTERTIA, LEFT_OFFSET_FOR_PRAM,top_offset+=LINE_HEIGHT_BODY);
+    body.drawString(LB_C_POSI, LEFT_OFFSET_FOR_PRAM,top_offset+=LINE_HEIGHT_BODY);
+    body.drawString(LB_CONTACT, LEFT_OFFSET_FOR_PRAM,top_offset+=LINE_HEIGHT_BODY);
+    body.drawString(LB_ACTION, LEFT_OFFSET_FOR_PRAM,top_offset+=LINE_HEIGHT_BODY);
+    //Param
+    ofSetColor(0, 205, 0);
+    body.drawString(LB_SPACER, (LEFT_OFFSET_FOR_PRAM+PARAMETER_SPC),top_offset=ag_top);
+    sprintf(str_val, "%.3f", ag.view);
+    body.drawString(str_val, (LEFT_OFFSET_FOR_PRAM+PARAMETER_SPC),top_offset+=LINE_HEIGHT_BODY);
+    sprintf(str_val, "%d", ag.strength);
+    body.drawString(str_val, (LEFT_OFFSET_FOR_PRAM+PARAMETER_SPC),top_offset+=LINE_HEIGHT_BODY);
+    sprintf(str_val, "%d", ag.dexterity);
+    body.drawString(str_val, (LEFT_OFFSET_FOR_PRAM+PARAMETER_SPC),top_offset+=LINE_HEIGHT_BODY);
+    sprintf(str_val, "%.3f", ag.hp);
+    body.drawString(str_val, (LEFT_OFFSET_FOR_PRAM+PARAMETER_SPC),top_offset+=LINE_HEIGHT_BODY);
+    ofSetColor(0,150,0);
+    sprintf(str_val, "%d", ag.inertia);
+    body.drawString(str_val, (LEFT_OFFSET_FOR_PRAM+PARAMETER_SPC),top_offset+=LINE_HEIGHT_BODY);
+    sprintf(str_val, "%.3f", ag.circumference_posi);
+    body.drawString(str_val, (LEFT_OFFSET_FOR_PRAM+PARAMETER_SPC),top_offset+=LINE_HEIGHT_BODY);
+    sprintf(str_val, "%d", ag.contact_flg);
+    body.drawString(str_val, (LEFT_OFFSET_FOR_PRAM+PARAMETER_SPC),top_offset+=LINE_HEIGHT_BODY);
+    sprintf(str_val, "%d", ag.action_flg);
+    body.drawString(str_val, (LEFT_OFFSET_FOR_PRAM+PARAMETER_SPC),top_offset+=LINE_HEIGHT_BODY);
     
+    return top_offset;
 }
 
 //--------------------------------------------------------------

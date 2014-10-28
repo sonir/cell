@@ -1,26 +1,6 @@
 #pragma once
 
-#define SCREEN_WIDTH  768//1024
-#define SCREEN_HEIGHT 768
-#define FONT_SIZE_MODIFY 7. //For dispray on center of Square
-
-//System
-#define ARM_NUM 4
-#define STEP_INTERVAL 0.2f
-#define SENDING_INTERVAL 5.0f
-
-//Define for OSC to Receive
-#define PORT 58137
-#define NUM_MSG_STRINGS 20
-//Define for OSC to Send
-//#define SENDER_HOST "49.212.138.54"
-//#define SENDER_PORT 57122
-
-//For FIS
-#define SENDER_HOST "127.0.0.1"
-#define SENDER_PORT 58137
-
-
+#include "cellSetup.h"
 #include "ofMain.h"
 #include "ofxOsc.h"
 #include "slCircular.h"
@@ -37,6 +17,7 @@ typedef struct system_t {
     int reset_flg;
     int stop_flg;
     int step_count;
+    bool sent_drone;
     
 }system_t;
 
@@ -81,6 +62,8 @@ class ofApp : public ofBaseApp{
         //Fis
     	DigitalFis digitalFis;
     
+        //Graphics
+        float dispAgentParam(float top_offset, int ag_id);
         //Drawing Arm
         slEuclid* space;
         float pirad;
@@ -94,11 +77,13 @@ class ofApp : public ofBaseApp{
 	    int agent_count;
         ToolKit toolKit;
         //Font
-        ofTrueTypeFont	dekar;
+        ofTrueTypeFont h1;
+        ofTrueTypeFont h2;
+        ofTrueTypeFont body;
     
         //Agent (model level)
         void addAgents();
-    
+
 	    //Agent (drawing level)
         float counter;
 		bool checkIntersect(slCircular *target);
@@ -109,5 +94,6 @@ class ofApp : public ofBaseApp{
         //Bridge Graphic and Model
         void syncPosition(int ag_id);
         void syncPositions();
-    
+
+
 };

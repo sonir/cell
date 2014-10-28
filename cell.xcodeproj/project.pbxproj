@@ -179,6 +179,7 @@
 		F248BF9219FEA5BC00757B40 /* slCellModelSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slCellModelSetup.h; sourceTree = "<group>"; };
 		F248BF9319FEA5BC00757B40 /* Toolkit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Toolkit.cpp; sourceTree = "<group>"; };
 		F248BF9419FEA5BC00757B40 /* Toolkit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Toolkit.h; sourceTree = "<group>"; };
+		F278B65519FF9551009179A5 /* cellSetup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cellSetup.h; sourceTree = "<group>"; };
 		F2A2755719FAEDF000371500 /* slCircular.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = slCircular.cpp; sourceTree = "<group>"; };
 		F2A2755819FAEDF000371500 /* slCircular.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slCircular.h; sourceTree = "<group>"; };
 		F2A2759819FAEDF000371500 /* slEuclid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = slEuclid.cpp; sourceTree = "<group>"; };
@@ -443,6 +444,7 @@
 				F2A2763519FAEE7500371500 /* DigitalFis.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
+				F278B65519FF9551009179A5 /* cellSetup.h */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				F2A8507B19FF14D400100FA5 /* DroneServer.cpp */,
 				F2A8507C19FF14D400100FA5 /* DroneServer.h */,
@@ -498,11 +500,11 @@
 		F248BF8D19FEA5BC00757B40 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				F248BF9219FEA5BC00757B40 /* slCellModelSetup.h */,
 				F248BF8E19FEA5BC00757B40 /* cellModelDataFoundation.cpp */,
 				F248BF8F19FEA5BC00757B40 /* cellModelDataFoundation.h */,
 				F248BF9019FEA5BC00757B40 /* slCellModel.cpp */,
 				F248BF9119FEA5BC00757B40 /* slCellModel.h */,
-				F248BF9219FEA5BC00757B40 /* slCellModelSetup.h */,
 				F248BF9319FEA5BC00757B40 /* Toolkit.cpp */,
 				F248BF9419FEA5BC00757B40 /* Toolkit.h */,
 			);
