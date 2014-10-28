@@ -8,7 +8,8 @@
 #include "slCellModel.h"
 #include "slMetro.h"
 #include "DigitalFis.h"
-#include "DroneServer.h"
+#include "SoundManager.h"
+
 
 
 typedef struct system_t {
@@ -54,7 +55,6 @@ class ofApp : public ofBaseApp{
 
         //OSC
         ofxOscSender server;
-        DroneServer droneServer;
     
         //Utilities
         slMetro *timerAgentStep;
@@ -94,6 +94,10 @@ class ofApp : public ofBaseApp{
         //Bridge Graphic and Model
         void syncPosition(int ag_id);
         void syncPositions();
-
+    
+        //Sound
+        SoundManager sound;
+        agent_snap_t snap;
+    
 
 };

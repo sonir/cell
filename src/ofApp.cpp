@@ -47,6 +47,7 @@ void ofApp::setup(){
     this->addAgents();
 
     
+    
 }
 
 //--------------------------------------------------------------
@@ -68,9 +69,15 @@ void ofApp::update(){
     }
 
     if(timerSendingParameters->alart()){
-        droneServer.send();
+        //Send Now Agents States
+        snap.ag0 = model->getAgent(0);
+        snap.ag1 = model->getAgent(1);
+        snap.ag2 = model->getAgent(2);
+        snap.ag3 = model->getAgent(3);
+        sound.update(snap);
         system.sent_drone = true;
     }
+    
     sendData();
 	listenOsc();
     
@@ -159,7 +166,7 @@ float ofApp::dispAgentParam(float top_offset, int ag_id){
     
     //Agent
     ofSetColor(0,205,0);
-    sprintf(str_val, LB_AGENT_ID, ag.id_num);
+    sprintf(str_val, LB_AGENT_ID, ag.ag_id);
     body.drawString(str_val, LEFT_OFFSET_FOR_PRAM,top_offset+=LINE_HEIGHT);
     ag_top = top_offset;
     ofSetColor(0,180,0);

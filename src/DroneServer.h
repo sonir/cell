@@ -9,8 +9,8 @@
 #ifndef __cell__DroneServer__
 #define __cell__DroneServer__
 
-#define SERVER_IP "49.212.138.54"
-#define SERVER_PORT 57122
+#define SND_SERVER_IP "49.212.138.54"
+#define SND_SERVER_PORT 57122
 
 #include <stdio.h>
 #include "ofxOsc.h"
@@ -53,12 +53,10 @@ class DroneServer{
     
 	public:
         DroneServer();
-        ofxOscSender server;
+        ofxOscSender soundServer;
 		drone_mes_t drone_param;
-        void initParam();
+        void initParam(drone_mes_t *pDrone);
         void send();
-        void test();
-        int foo;
     
 };
 

@@ -13,7 +13,7 @@
 //System
 #define ARM_NUM 4
 //System Timers
-#define STEP_INTERVAL 0.01f
+#define STEP_INTERVAL 0.2f
 #define SENDING_INTERVAL 5.0f
 
 //Define for OSC to Receive
