@@ -46,6 +46,8 @@ typedef struct drone_mes_t {
     float auto_filter_ammount;
     float auto_filter_rate;
     float auto_filter_cutoff;
+    int sequece_pattern; //0=white noise , 1=pattern1, 2=pattern2
+    
 
 } drone_mes_t;
 

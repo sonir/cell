@@ -50,6 +50,7 @@ void DroneServer::send(){
     m.addFloatArg(drone_param.auto_filter_ammount);
     m.addFloatArg(drone_param.auto_filter_rate);
     m.addFloatArg(drone_param.auto_filter_cutoff);
+    m.addIntArg(drone_param.sequece_pattern);
     soundServer.sendMessage(m);
     
     
@@ -91,5 +92,6 @@ void DroneServer::initParam(drone_mes_t *pDrone){
     pDrone->auto_filter_ammount = 0.7f;
     pDrone->auto_filter_rate = 0.7f;
     pDrone->auto_filter_cutoff = 0.7f;
+    pDrone->sequece_pattern = 1;
 
 }

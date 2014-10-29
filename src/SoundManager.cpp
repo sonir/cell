@@ -96,6 +96,8 @@ void SoundManager::mappingToDrone(){
 //    drone_params.auto_filter_cutoff = 0.7f;
     drone_params.auto_filter_cutoff = 0.5f;
     
+    drone_params.sequece_pattern = 1;
+    
 }
 
 
