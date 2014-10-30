@@ -11,9 +11,8 @@
 DroneServer::DroneServer(){
     
     cout << "drones" << endl;
-    soundServer.setup(SND_SERVER_IP, SND_SERVER_PORT);
+    server.setup(SND_SERVER_IP, SND_SERVER_PORT);
     this->initParam(&drone_param);
-    
 }
 
 
@@ -51,17 +50,17 @@ void DroneServer::send(){
     m.addFloatArg(drone_param.auto_filter_rate);
     m.addFloatArg(drone_param.auto_filter_cutoff);
     m.addIntArg(drone_param.sequece_pattern);
-    soundServer.sendMessage(m);
+    server.sendMessage(m);
     
     
 }
 
-void DroneServer::send(drone_mes_t getParams){
+void DroneServer::send(drone_param_t getParams){
     drone_param = getParams;
     this->send();
 }
 
-void DroneServer::initParam(drone_mes_t *pDrone){
+void DroneServer::initParam(drone_param_t *pDrone){
 
     pDrone->twitter_announce = 0;
     pDrone->twitter_log = 0;

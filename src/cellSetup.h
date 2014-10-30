@@ -15,7 +15,8 @@
 //System Timers
 #define STEP_INTERVAL 0.2f //0.2f
 #define STEP_INTERVAL_NORMAL_MODE 0.15f
-#define SENDING_INTERVAL 10.0f //5.0f
+#define SENDING_INTERVAL 1.0f //5.0f
+#define ARDUINO_UPDATE_INTERVAL 0.1f
 //Modes
 #define DEFAULT_STOP_FLG 1
 #define DEFAULT_CLOCK_MODE 1

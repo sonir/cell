@@ -10,6 +10,7 @@ void ofApp::setup(){
     system.fps = 60;
     timerAgentStep = new slMetro(STEP_INTERVAL);
     timerSendingParameters = new slMetro(SENDING_INTERVAL);
+    timerArduinoUpdate = new slMetro(ARDUINO_UPDATE_INTERVAL);
     
     //Font Setup
     ofTrueTypeFont::setGlobalDpi(72);
@@ -86,9 +87,19 @@ void ofApp::update(){
         snap.ag[1] = model->getAgent(1);
         snap.ag[2] = model->getAgent(2);
         snap.ag[3] = model->getAgent(3);
-        sound.update(snap);
+        sound.update(SOUND, snap);
         system.sent_drone = true;
     }
+
+    if(timerArduinoUpdate->alart()){
+        //Send Now Agents States
+        snap.ag[0] = model->getAgent(0);
+        snap.ag[1] = model->getAgent(1);
+        snap.ag[2] = model->getAgent(2);
+        snap.ag[3] = model->getAgent(3);
+        sound.update(ARDUINO, snap);
+    }
+
     
     sendData();
 	listenOsc();

@@ -8,7 +8,7 @@
 #include "slCellModel.h"
 #include "slMetro.h"
 #include "DigitalFis.h"
-#include "SoundManager.h"
+#include "ServerManager.h"
 
 
 
@@ -60,6 +60,7 @@ class ofApp : public ofBaseApp{
         //Utilities
         slMetro *timerAgentStep;
         slMetro *timerSendingParameters;
+        slMetro *timerArduinoUpdate;
         //Fis
     	DigitalFis digitalFis;
     
@@ -97,7 +98,7 @@ class ofApp : public ofBaseApp{
         void syncPositions();
     
         //Sound
-        SoundManager sound;
+        ServerManager sound;
         agent_snap_t snap;
     
 
