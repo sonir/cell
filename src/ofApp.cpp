@@ -21,6 +21,9 @@ void ofApp::setup(){
     body.loadFont("frabk.ttf", 12, false, true);
     // body.loadFont("Dekar.otf", 16, true, true);
     
+    
+    this->initTouched();
+    
 	//APP Setup
     system.reset_flg = 0; //Init reset flag
     system.stop_flg = DEFAULT_STOP_FLG; // Init stop flag
@@ -65,6 +68,10 @@ void ofApp::update(){
     }        
     //Do Agent Cycle
     if(!system.stop_flg){
+        
+        
+        model->syncTouchEvent(touched);
+        initTouched(); //Reset the flg after sending
         
         if(system.clock_flg){
             //Clock Mode
@@ -441,8 +448,12 @@ void ofApp::listenOsc(){
             cout << ag.circumference_posi << endl;
 			if( m.getArgAsFloat(2) != 0.) circle->radius = m.getArgAsFloat(2);
 
-		}
-		else{
+		}if(m.getAddress() == "/touch"){
+            
+            cout << "touch" << m.getArgAsInt32(0) << endl;
+            touched.ag[m.getArgAsInt32(0)] = true;
+            
+        } else{
 			// unrecognized message: display on the bottom of the screen
 			string msg_string;
 			msg_string = m.getAddress();
@@ -496,3 +507,16 @@ void ofApp::syncPositions(){
 
     
 }
+
+//initTouchedEvent();
+void ofApp::initTouched(){
+    
+    //Init Touched Event Memory
+    for(int i =0; i<AG_MAX_NUM; i++)
+    {
+        touched.ag[i] = false;
+    }
+    
+    
+}
+

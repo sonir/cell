@@ -92,6 +92,7 @@ class ofApp : public ofBaseApp{
 		void setupSeeds();
 		void displayAgents();
 		void listenOsc();
+
     
         //Bridge Graphic and Model
         void syncPosition(int ag_id);
@@ -100,6 +101,11 @@ class ofApp : public ofBaseApp{
         //Sound
         ServerManager sound;
         agent_snap_t snap;
+    
+        //touch_event hundler
+        phisical_contact_t touched;
+        //initTouchedEvent();
+        void initTouched();
     
 
 };
