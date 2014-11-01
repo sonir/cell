@@ -44,7 +44,7 @@ class ArduinoServer : Server {
 	    void initPram(arduino_param_t *pArduino);
 	    void send();
 	    void send(arduino_param_t getParams);
-        void getMessages();
+//        void getMessages();
     
 };
 

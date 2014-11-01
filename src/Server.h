@@ -35,12 +35,12 @@ class Server{
         virtual void initParam(sending_message_t *pMessage);
         virtual void send();
         virtual void send(sending_message_t getParams);
-        virtual void getMessages();
+//        virtual void getMessages();
 
-        //Variables for To Receive
-        int current_msg_string;
-        string msg_strings[NUM_MSG_STRINGS];
-        float timers[NUM_MSG_STRINGS];    
+//        //Variables for To Receive
+//        int current_msg_string;
+//        string msg_strings[NUM_MSG_STRINGS];
+//        float timers[NUM_MSG_STRINGS];    
 };
 
 #endif /* defined(__cell__Server__) */
