@@ -76,13 +76,18 @@ void ofApp::update(){
             //Clock Mode
             if(timerAgentStep->alart()){
                 model->stroke(system.step_count);
+                model->initTouchEvent(system.step_count);
                 system.step_count++;
-                if(system.step_count>=ARM_NUM)system.step_count=0; //If finished one loop, Reset count
+                if(system.step_count>=ARM_NUM){
+                    system.step_count=0; //If finished one loop, Reset count
+                }
+                
             }
             
         }else{ //Normal Mode
             
             if(timerAgentStep->alart())model->cycle();
+            model->initTouchEvent();
             
         }
     }
@@ -228,8 +233,32 @@ float ofApp::dispAgentParam(float top_offset, int ag_id){
     body.drawString(str_val, (LEFT_OFFSET_FOR_PRAM+PARAMETER_SPC),top_offset+=LINE_HEIGHT_BODY);
     sprintf(str_val, "%d", ag.contact_flg);
     body.drawString(str_val, (LEFT_OFFSET_FOR_PRAM+PARAMETER_SPC),top_offset+=LINE_HEIGHT_BODY);
-    sprintf(str_val, "%d", ag.action_flg);
-    body.drawString(str_val, (LEFT_OFFSET_FOR_PRAM+PARAMETER_SPC),top_offset+=LINE_HEIGHT_BODY);
+    string action;
+    switch(ag.action_flg){
+        case RANDOM_WALK:
+            action = "RAND_W";
+            break;
+        case CHASE:
+            action = "CHASE";
+            break;
+        case RUN:
+            action = "RUN";
+            break;
+        case ATTACK:
+            action = "ATTACK";
+            break;            
+        case DMG:
+            action = "DMG";
+            break;
+        case DEATH:
+            action = "DEATH";
+            break;
+
+    }
+    //sprintf(str_val, "%s", action);
+//    body.drawString(str_val, (LEFT_OFFSET_FOR_PRAM+PARAMETER_SPC),top_offset+=LINE_HEIGHT_BODY);
+    body.drawString(action, (LEFT_OFFSET_FOR_PRAM+PARAMETER_SPC),top_offset+=LINE_HEIGHT_BODY);
+
     
     return top_offset;
 }
@@ -543,9 +572,9 @@ void ofApp::listenOsc(){
 
 		}if(m.getAddress() == "/touch"){
             
-            cout << "touch" << m.getArgAsInt32(0) << endl;
+//            cout << "touch" << m.getArgAsInt32(0) << endl;
             touched.ag[m.getArgAsInt32(0)] = true;
-            system.stop_flg=1;
+            //system.stop_flg=1;
             
         } else{
 			// unrecognized message: display on the bottom of the screen
