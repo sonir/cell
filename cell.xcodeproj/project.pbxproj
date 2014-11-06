@@ -63,6 +63,7 @@
 		F2A2761719FAEDF100371500 /* slEuclid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2A2759819FAEDF000371500 /* slEuclid.cpp */; };
 		F2A2763619FAEE7500371500 /* DigitalFis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2A2763419FAEE7500371500 /* DigitalFis.cpp */; };
 		F2A8507D19FF14D400100FA5 /* DroneServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2A8507B19FF14D400100FA5 /* DroneServer.cpp */; };
+		F2BBF99C1A0B7D3700196099 /* ClipServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2BBF99A1A0B7D3700196099 /* ClipServer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -204,6 +205,8 @@
 		F2A8507A19FF0AF300100FA5 /* armControl.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = armControl.app; sourceTree = "<group>"; };
 		F2A8507B19FF14D400100FA5 /* DroneServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DroneServer.cpp; sourceTree = "<group>"; };
 		F2A8507C19FF14D400100FA5 /* DroneServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroneServer.h; sourceTree = "<group>"; };
+		F2BBF99A1A0B7D3700196099 /* ClipServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClipServer.cpp; sourceTree = "<group>"; };
+		F2BBF99B1A0B7D3700196099 /* ClipServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipServer.h; sourceTree = "<group>"; };
 		F4F5B6B8BA2BD52C646ED908 /* OscException.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = OscException.h; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscException.h; sourceTree = SOURCE_ROOT; };
 		F7FBC56859535E597B24BB91 /* NetworkingUtils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = NetworkingUtils.h; path = ../../../addons/ofxOsc/libs/oscpack/src/ip/NetworkingUtils.h; sourceTree = SOURCE_ROOT; };
 		FC5DA1C87211D4F6377DA719 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = tinyxmlparser.cpp; path = ../../../addons/ofxXmlSettings/libs/tinyxmlparser.cpp; sourceTree = SOURCE_ROOT; };
@@ -468,6 +471,8 @@
 				F29A7BC51A0254D600BAB6C4 /* ArduinoServer.h */,
 				F2A8507B19FF14D400100FA5 /* DroneServer.cpp */,
 				F2A8507C19FF14D400100FA5 /* DroneServer.h */,
+				F2BBF99A1A0B7D3700196099 /* ClipServer.cpp */,
+				F2BBF99B1A0B7D3700196099 /* ClipServer.h */,
 				F29A7BC71A02563B00BAB6C4 /* Server.cpp */,
 				F29A7BC81A02563B00BAB6C4 /* Server.h */,
 				F29A7BCA1A02A3E800BAB6C4 /* ServerManager.cpp */,
@@ -707,6 +712,7 @@
 				640279EE111671BD026CB013 /* ofxOscReceiver.cpp in Sources */,
 				8F5205AEF8861EF234F0651A /* ofxOscSender.cpp in Sources */,
 				ADE367465D2A8EBAD4C7A8D9 /* IpEndpointName.cpp in Sources */,
+				F2BBF99C1A0B7D3700196099 /* ClipServer.cpp in Sources */,
 				67FE4C7B15C2F0478C8126C2 /* NetworkingUtils.cpp in Sources */,
 				F248BFAE19FEA5BD00757B40 /* Toolkit.cpp in Sources */,
 				510CAFE035E576A4E1502D52 /* UdpSocket.cpp in Sources */,

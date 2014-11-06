@@ -2,6 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    
 
     //Instanciate Model
     model = new slCellModel(SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -99,6 +100,7 @@ void ofApp::update(){
         snap.ag[2] = model->getAgent(2);
         snap.ag[3] = model->getAgent(3);
         sound.update(SOUND, snap);
+        sound.update(CLIP, snap);
         system.sent_drone = true;
     }
 

@@ -18,9 +18,10 @@
 #include "slCellModel.h"
 #include "slEuclid.h"
 #include "DroneServer.h"
+#include "ClipServer.h"
 #include "ArduinoServer.h"
 
-enum update_destination {SOUND, ARDUINO};
+enum update_destination {SOUND, CLIP, ARDUINO};
 
 typedef struct agent_snap_t {
     
@@ -36,15 +37,18 @@ class ServerManager {
         int degradeCheck();
         int autoPanCheck();
         void mappingToDrone();
+        void mappingToClip();
         void mappingToArduino();
         void update(update_destination to, agent_snap_t snap);
     
         DroneServer *droneServer;
+        ClipServer *clipServer;
         ArduinoServer *arduinoServer;
     
     private:
         agent_snap_t model;
         drone_param_t drone_params;
+        clip_param_t clip_params;
         arduino_param_t arduino_params;
     
 };

@@ -13,6 +13,7 @@ ServerManager::ServerManager(){
     
 //    intervalTimer = new slMetro(SENDING_INTERVAL);
     droneServer = new DroneServer;
+    clipServer = new ClipServer;
     arduinoServer = new ArduinoServer;
     
 }
@@ -102,6 +103,16 @@ void ServerManager::mappingToDrone(){
     
 }
 
+void ServerManager::mappingToClip(){
+    
+    
+    clip_param_t clip;
+    clipServer->initParam(&clip);
+    clip_params = clip;
+    
+}
+
+
 void ServerManager::mappingToArduino(){
     
     
@@ -133,6 +144,10 @@ void ServerManager::update(update_destination to,  agent_snap_t snap){
             this->mappingToDrone();
             droneServer->send(drone_params);
             break;
+            
+        case CLIP:
+            this->mappingToClip();
+            clipServer->send(clip_params);
             
         case ARDUINO:
             this->mappingToArduino();

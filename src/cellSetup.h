@@ -85,7 +85,7 @@
 #define PARAMETER_SPC 70
 #define LINE_HEIGHT 30
 #define LINE_HEIGHT_BODY 15.0f
-#define DISP_TITLE "CELL Operation Sytem Ver0.3"
+#define DISP_TITLE "CELL Operation System Ver0.3"
 #define MESSAGE1 "SPC : START SIMULATOR"
 #define SENDIG_MES "connect with drone server"
 #define LB_MOVE_MODE1 "clock mode"
