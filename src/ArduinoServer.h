@@ -9,7 +9,8 @@
 #ifndef __cell__ArduinoServer__
 #define __cell__ArduinoServer__
 
-#define ARDUINO_SERVER_IP "127.0.0.1"
+//#define ARDUINO_SERVER_IP "127.0.0.1"
+#define ARDUINO_SERVER_IP "224.0.0.1 " //MultiCast
 #define ARDUINO_SERVER_PORT 57137
 #define ARDUINO_RECEIVING_PORT 57138
 #define TOUCH_SENSOR_CH_NUM 4

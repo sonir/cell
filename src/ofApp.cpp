@@ -16,6 +16,8 @@ void ofApp::setup(){
     system.stop_flg = DEFAULT_STOP_FLG; // Init stop flag
     system.step_count = 0;
     system.sent_drone = 0;
+    system.temp = 25.0f;
+    system.light = 0.5f;
     //Init Timers
     timerAgentStep = new slMetro(system.step_interval);
     timerSendingParameters = new slMetro(system.sending_interval);
@@ -100,7 +102,8 @@ void ofApp::update(){
         snap.ag[2] = model->getAgent(2);
         snap.ag[3] = model->getAgent(3);
         sound.update(SOUND, snap);
-        sound.update(CLIP, snap);
+        //TODO: make timer for clip
+//        sound.update(CLIP, snap);
         system.sent_drone = true;
     }
 
@@ -175,6 +178,12 @@ void ofApp::draw(){
     ofSetColor(225);
     h1.drawString(DISP_TITLE, LEFT_OFFSET, TOP_OFFSET);
     h2.drawString(MESSAGE1, LEFT_OFFSET, top_offset+=LINE_HEIGHT);
+    //TODO:Is this correct?
+    char tmpStr[40];
+    sprintf(tmpStr, "light:%.3f temp:%.3f", system.light, system.temp);
+    h2.drawString(tmpStr, LEFT_OFFSET, top_offset+=LINE_HEIGHT),
+//    sprintf(tmpStr, "%.3f", system.temp);
+//    h2.drawString(MESSAGE1, LEFT_OFFSET, top_offset+=LINE_HEIGHT);
     top_offset = this->dispAgentParam(top_offset,0);
     top_offset = this->dispAgentParam(top_offset,1);
     top_offset = this->dispAgentParam(top_offset,2);
@@ -579,7 +588,10 @@ void ofApp::listenOsc(){
             touched.ag[m.getArgAsInt32(0)] = true;
             //system.stop_flg=1;
             
-        } else{
+        }if(m.getAddress() == "/sensorVal"){
+            system.light = m.getArgAsFloat(0);
+            system.temp = m.getArgAsFloat(1);
+        }else{
 			// unrecognized message: display on the bottom of the screen
 			string msg_string;
 			msg_string = m.getAddress();

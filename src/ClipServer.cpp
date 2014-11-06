@@ -12,6 +12,7 @@ ClipServer::ClipServer(){
     
     cout << "clips" << endl;
     server.setup(SND_SERVER_IP, SND_SERVER_PORT);
+    printServer.setup(PRINT_SERVER_IP, PRINT_SERVER_PORT);
     this->initParam(&clip_param);
 }
 
@@ -42,8 +43,9 @@ void ClipServer::send(){
     m.addIntArg(clip_param.ef_noiseconv_on);
     m.addFloatArg(clip_param.ef_noise_conv_modamp);
     m.addIntArg(clip_param.clip_id);
-    server.sendMessage(m);
-    
+    //TODO: Rest until Start
+    //server.sendMessage(m);
+    printServer.sendMessage(m);
     
 }
 
@@ -54,7 +56,7 @@ void ClipServer::send(clip_param_t getParams){
 
 void ClipServer::initParam(clip_param_t *pClip){
 
-    pClip->duration_frame = (int)ofRandom(2)+1; // 1-3
+    pClip->duration_frame = (int)ofRandom(2); // 1-3
     pClip->tick_snd = ofRandom(1199)+1;   //1-1200
     pClip->tick_noise = ofRandom(1199)+1; //1-1200
     pClip->snd1_type = ofRandom(4); //0-4

@@ -25,6 +25,9 @@ typedef struct system_t {
     int clock_flg;
     int step_count;
     bool sent_drone;
+
+    float light; 
+    float temp;
     
 }system_t;
 
