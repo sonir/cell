@@ -62,34 +62,3 @@ void ArduinoServer::initPram(arduino_param_t *pArduino){
 
 }
 
-void ArduinoServer::getMessages(){
-
-    
-    // hide old messages
-    for(int i = 0; i < NUM_MSG_STRINGS; i++){
-        if(timers[i] < ofGetElapsedTimef()){
-            msg_strings[i] = "";
-        }
-    }
-    
-    // check for waiting messages
-    while(receiver.hasWaitingMessages()){
-        // get the next message
-        ofxOscMessage m;
-        receiver.getNextMessage(&m);
-        
-        // check for mouse moved message
-        if(m.getAddress() == "/touchSensorState"){
-
-            for(int i=0;i<TOUCH_SENSOR_CH_NUM;i++) touch_sensor_state.ch[i] = m.getArgAsInt32(i);
-            
-        }
-
-    }
-    
-    
-    cout <<touch_sensor_state.ch[0]<<endl;
-
-    
-}
-

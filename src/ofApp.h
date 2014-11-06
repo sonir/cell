@@ -15,6 +15,11 @@
 typedef struct system_t {
 
     int fps;
+    float step_interval;
+    float step_interval_normal_mode;
+    float sending_interval;
+    float arduino_update_interval;
+        
     int reset_flg;
     int stop_flg;
     int clock_flg;
@@ -22,6 +27,20 @@ typedef struct system_t {
     bool sent_drone;
     
 }system_t;
+
+typedef struct preset_t{
+    
+    int fps;
+    float step_interval;
+    float step_interval_normal_mode;
+
+    float mov_fix;
+    float random_walk_fix;
+    
+    int clock_flg;
+    
+    
+} preset_t;
 
 
 class ofApp : public ofBaseApp{
@@ -40,8 +59,14 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+        void initPresetmodes();
+        preset_mode_t setPresetMode(preset_mode_t target_mode);
+        void updateSystemValue();
+
 
         system_t system;
+        preset_mode_t preset_mode_now;
+        preset_t preset[5];
         slCellModel *model;
     
     	//OSC Receive
@@ -104,7 +129,6 @@ class ofApp : public ofBaseApp{
     
         //touch_event hundler
         phisical_contact_t touched;
-        //initTouchedEvent();
         void initTouched();
     
 

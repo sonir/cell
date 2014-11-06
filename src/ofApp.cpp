@@ -5,31 +5,31 @@ void ofApp::setup(){
 
     //Instanciate Model
     model = new slCellModel(SCREEN_WIDTH, SCREEN_HEIGHT);
+    //APP Setup
+    initPresetmodes(); //Make presets
+    setPresetMode(PS_DEFAULT); //Set values
+    system.sending_interval = SENDING_INTERVAL;
     
-    //System Setup
-    system.fps = 60;
-    timerAgentStep = new slMetro(STEP_INTERVAL);
-    timerSendingParameters = new slMetro(SENDING_INTERVAL);
-    timerArduinoUpdate = new slMetro(ARDUINO_UPDATE_INTERVAL);
+    //Init system flags
+    system.reset_flg = 0; //Init reset flag
+    system.stop_flg = DEFAULT_STOP_FLG; // Init stop flag
+    system.step_count = 0;
+    system.sent_drone = 0;
+    //Init Timers
+    timerAgentStep = new slMetro(system.step_interval);
+    timerSendingParameters = new slMetro(system.sending_interval);
+    timerArduinoUpdate = new slMetro(system.arduino_update_interval);
     
     //Font Setup
     ofTrueTypeFont::setGlobalDpi(72);
     h1.loadFont("Dekar.otf", 30, true, true);
     h2.loadFont("Dekar.otf", 18, true, true);
-//    h1.loadFont("verdana.ttf", 30, true, true);
-//    h2.loadFont("verdana.ttf", 18, true, true);
     body.loadFont("frabk.ttf", 12, false, true);
-    // body.loadFont("Dekar.otf", 16, true, true);
     
     
     this->initTouched();
     
-	//APP Setup
-    system.reset_flg = 0; //Init reset flag
-    system.stop_flg = DEFAULT_STOP_FLG; // Init stop flag
-    system.clock_flg = DEFAULT_CLOCK_MODE;
-    system.step_count = 0;
-    system.sent_drone = 0;
+
     int ofSetFrameRate(system.fps); //Setup Frame Rate
     if(false)toolKit.dice(6); //No meaning code to avoid "Unused" warning.
     
@@ -61,7 +61,6 @@ void ofApp::setup(){
 void ofApp::update(){
 
 
-
     //Reset check for Mutex
     if(system.reset_flg){
         system.reset_flg = 0;
@@ -78,7 +77,7 @@ void ofApp::update(){
             if(timerAgentStep->alart()){
                 model->stroke(system.step_count);
                 system.step_count++;
-                if(system.step_count>=ARM_NUM)system.step_count=0;
+                if(system.step_count>=ARM_NUM)system.step_count=0; //If finished one loop, Reset count
             }
             
         }else{ //Normal Mode
@@ -250,9 +249,25 @@ void ofApp::keyReleased(int key){
     } else if (key == 'c'){
         system.clock_flg = ( (system.clock_flg-1)*(-1) ); //Invert the value
         //Set the interval
-        if(system.clock_flg) timerAgentStep->set(STEP_INTERVAL);
-        else timerAgentStep->set(STEP_INTERVAL_NORMAL_MODE);
+        if(system.clock_flg) timerAgentStep->set(system.step_interval);
+        else timerAgentStep->set(system.step_interval_normal_mode);
+    } else if (key == '0'){
+        setPresetMode(PS_DEFAULT);
+        updateSystemValue();
+    } else if (key == '1'){
+        setPresetMode(PS_MICRO);
+        updateSystemValue();
+    } else if (key == '2'){
+        setPresetMode(PS_CATHARSIS);
+        updateSystemValue();
+    } else if (key == '3'){
+        setPresetMode(PS_VIBE);
+        updateSystemValue();
+    } else if (key == '4'){
+        setPresetMode(PS_SYNC);
+        updateSystemValue();
     }
+
 
 }
 
@@ -289,6 +304,83 @@ void ofApp::gotMessage(ofMessage msg){
 //--------------------------------------------------------------
 void ofApp::dragEvent(ofDragInfo dragInfo){ 
 
+}
+
+//--------------------------------------------------------------
+void ofApp::initPresetmodes(){
+    
+    //TODO: here
+    
+    //PS_DEFAULT
+    preset[PS_DEFAULT].fps = DEFAULT_SYSTWM_FPS;
+    preset[PS_DEFAULT].step_interval = DEFAULT_STEP_INTERVAL;
+    preset[PS_DEFAULT].step_interval_normal_mode = DEFAULT_STEP_INTERVAL_NORMAL_MODE;
+    preset[PS_DEFAULT].mov_fix = DEFAULT_MOV_FIX;
+    preset[PS_DEFAULT].random_walk_fix = DEFAULT_RANDOM_WALK_FIX;
+    preset[PS_DEFAULT].clock_flg = DEFAULT_CLOCK_MODE;
+
+    //PS_MICRO
+    preset[PS_MICRO].fps = PS_MICRO_SYSTWM_FPS;
+    preset[PS_MICRO].step_interval = PS_MICRO_STEP_INTERVAL;
+    preset[PS_MICRO].step_interval_normal_mode = PS_MICRO_STEP_INTERVAL_NORMAL_MODE;
+    preset[PS_MICRO].mov_fix = PS_MICRO_MOV_FIX;
+    preset[PS_MICRO].random_walk_fix = PS_MICRO_RANDOM_WALK_FIX;
+    preset[PS_MICRO].clock_flg = PS_MICRO_CLOCK_MODE;
+
+    //PS_CATHARSIS
+    preset[PS_CATHARSIS].fps = PS_CATHARSIS_SYSTWM_FPS;
+    preset[PS_CATHARSIS].step_interval = PS_CATHARSIS_STEP_INTERVAL;
+    preset[PS_CATHARSIS].step_interval_normal_mode = PS_CATHARSIS_STEP_INTERVAL_NORMAL_MODE;
+    preset[PS_CATHARSIS].mov_fix = PS_CATHARSIS_MOV_FIX;
+    preset[PS_CATHARSIS].random_walk_fix = PS_CATHARSIS_RANDOM_WALK_FIX;
+    preset[PS_CATHARSIS].clock_flg = PS_CATHARSIS_CLOCK_MODE;
+
+    //PS_VIBE
+    preset[PS_VIBE].fps = PS_VIBE_SYSTWM_FPS;
+    preset[PS_VIBE].step_interval = PS_VIBE_STEP_INTERVAL;
+    preset[PS_VIBE].step_interval_normal_mode = PS_VIBE_STEP_INTERVAL_NORMAL_MODE;
+    preset[PS_VIBE].mov_fix = PS_VIBE_MOV_FIX;
+    preset[PS_VIBE].random_walk_fix = PS_VIBE_RANDOM_WALK_FIX;
+    preset[PS_VIBE].clock_flg = PS_VIBE_CLOCK_MODE;
+
+    //PS_SYNC
+    preset[PS_SYNC].fps = PS_SYNC_SYSTWM_FPS;
+    preset[PS_SYNC].step_interval = PS_SYNC_STEP_INTERVAL;
+    preset[PS_SYNC].step_interval_normal_mode = PS_SYNC_STEP_INTERVAL_NORMAL_MODE;
+    preset[PS_SYNC].mov_fix = PS_SYNC_MOV_FIX;
+    preset[PS_SYNC].random_walk_fix = PS_SYNC_RANDOM_WALK_FIX;
+    preset[PS_SYNC].clock_flg = PS_SYNC_CLOCK_MODE;
+   
+}
+
+//--------------------------------------------------------------
+preset_mode_t ofApp::setPresetMode(preset_mode_t target_mode){
+    
+    //Change preset mode
+    system.fps = preset[target_mode].fps;
+    system.step_interval = preset[target_mode].step_interval;
+    system.step_interval_normal_mode = preset[target_mode].step_interval_normal_mode;
+    system.clock_flg = preset[target_mode].clock_flg;
+    model->setMovFix(preset[target_mode].mov_fix);
+    model->setRandomWalkFix(preset[target_mode].random_walk_fix);
+    
+    //Change Now Preset mode
+    preset_mode_now = target_mode;
+    
+}
+
+void ofApp::updateSystemValue(){
+    
+    //Update
+    ofSetFrameRate(system.fps);
+    
+    if(system.clock_flg){
+        timerAgentStep->set(system.step_interval);
+    }else{
+        timerAgentStep->set(system.step_interval_normal_mode);
+    }
+    
+    
 }
 
 //--------------------------------------------------------------
@@ -407,6 +499,7 @@ void ofApp::sendData(){
     server.sendMessage(m);
 
 }
+
 //--------------------------------------------------------------
 
 void ofApp::listenOsc(){
@@ -452,6 +545,7 @@ void ofApp::listenOsc(){
             
             cout << "touch" << m.getArgAsInt32(0) << endl;
             touched.ag[m.getArgAsInt32(0)] = true;
+            system.stop_flg=1;
             
         } else{
 			// unrecognized message: display on the bottom of the screen
