@@ -257,8 +257,9 @@ float ofApp::dispAgentParam(float top_offset, int ag_id){
     }
     //sprintf(str_val, "%s", action);
 //    body.drawString(str_val, (LEFT_OFFSET_FOR_PRAM+PARAMETER_SPC),top_offset+=LINE_HEIGHT_BODY);
+    if(ag.action_flg==DMG||ag.action_flg==DEATH) ofSetColor(205, 0, 0);
     body.drawString(action, (LEFT_OFFSET_FOR_PRAM+PARAMETER_SPC),top_offset+=LINE_HEIGHT_BODY);
-
+    if(ag.action_flg==DMG||ag.action_flg==DEATH) ofSetColor(0, 205, 0);
     
     return top_offset;
 }
