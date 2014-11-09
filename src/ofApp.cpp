@@ -22,6 +22,8 @@ void ofApp::setup(){
     timerAgentStep = new slMetro(system.step_interval);
     timerSendingParameters = new slMetro(system.sending_interval);
     timerArduinoUpdate = new slMetro(system.arduino_update_interval);
+    timerClipEvent = new slMetro(CLIP_EVENT_INTERVAL);
+	modeInterval = new slMetro(MODE_INTERVAL);
     
     //Font Setup
     ofTrueTypeFont::setGlobalDpi(72);
@@ -116,6 +118,55 @@ void ofApp::update(){
         sound.update(ARDUINO, snap);
     }
 
+    if(timerClipEvent->alart()){
+
+        //Send Now Agents States
+        snap.ag[0] = model->getAgent(0);
+        snap.ag[1] = model->getAgent(1);
+        snap.ag[2] = model->getAgent(2);
+        snap.ag[3] = model->getAgent(3);        
+        sound.update(CLIP, snap);
+        
+    }
+	
+	if(modeInterval->alart()){
+		
+//        //Send Now Agents States
+//        setPresetMode( toolKit.dice(3)+1);
+		
+		//
+//		switch (toolKit.dice(3)-1){
+//				
+//			case 0:
+//				setPresetMode(PS_DEFAULT);
+//				updateSystemValue();				
+//				cout << "mode PS_DEFAULT" << endl;
+//				break;
+//				
+//			case 1:
+//				setPresetMode(PS_MICRO);
+//				updateSystemValue();				
+//				cout << "mode: PS_MICRO" << endl;
+//				break;
+//				
+//			case 2:
+//				setPresetMode(PS_CATHARSIS);
+//				updateSystemValue();				
+//				cout << "mode: PS_MICRO" << endl;
+//				break;
+//				
+//			default:
+//				setPresetMode(PS_DEFAULT);
+//				updateSystemValue();				
+//				cout << "mode: by SWITCH_DEFAULT PS_DEFAULT" << endl;				
+//				break;
+//				
+//				
+//				
+//		}
+        
+    }
+
     
     sendData();
 	listenOsc();
@@ -182,8 +233,6 @@ void ofApp::draw(){
     char tmpStr[40];
     sprintf(tmpStr, "light:%.3f temp:%.3f", system.light, system.temp);
     h2.drawString(tmpStr, LEFT_OFFSET, top_offset+=LINE_HEIGHT),
-//    sprintf(tmpStr, "%.3f", system.temp);
-//    h2.drawString(MESSAGE1, LEFT_OFFSET, top_offset+=LINE_HEIGHT);
     top_offset = this->dispAgentParam(top_offset,0);
     top_offset = this->dispAgentParam(top_offset,1);
     top_offset = this->dispAgentParam(top_offset,2);
@@ -407,6 +456,7 @@ preset_mode_t ofApp::setPresetMode(preset_mode_t target_mode){
     
     //Change Now Preset mode
     preset_mode_now = target_mode;
+	
     
 }
 

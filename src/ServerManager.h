@@ -20,6 +20,7 @@
 #include "DroneServer.h"
 #include "ClipServer.h"
 #include "ArduinoServer.h"
+#include "Toolkit.h"
 
 enum update_destination {SOUND, CLIP, ARDUINO};
 
@@ -50,6 +51,7 @@ class ServerManager {
         drone_param_t drone_params;
         clip_param_t clip_params;
         arduino_param_t arduino_params;
+		ToolKit *tool;
     
 };
 

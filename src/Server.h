@@ -13,6 +13,9 @@
 
 #include <stdio.h>
 #include "ofxOsc.h"
+#include <iostream.h>
+#include <stdlib.h>
+#include <time.h>
 
 
 

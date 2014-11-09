@@ -44,7 +44,7 @@ void ClipServer::send(){
     m.addFloatArg(clip_param.ef_noise_conv_modamp);
     m.addIntArg(clip_param.clip_id);
     //TODO: Rest until Start
-    //server.sendMessage(m);
+    server.sendMessage(m);
     printServer.sendMessage(m);
     
 }

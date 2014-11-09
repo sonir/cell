@@ -15,6 +15,7 @@ ServerManager::ServerManager(){
     droneServer = new DroneServer;
     clipServer = new ClipServer;
     arduinoServer = new ArduinoServer;
+	tool = new ToolKit;
     
 }
 
@@ -44,8 +45,19 @@ int ServerManager::autoPanCheck(){
 
 void ServerManager::mappingToDrone(){
     
-    drone_params.twitter_announce = 0;
-    drone_params.twitter_log = 0;
+	int announce_flg = 0;
+	if(tool->dice(TWEET_RATE)==1){
+		announce_flg = 1;
+	};
+	
+	int log_flg = 0;
+	if(tool->dice(TWEET_RATE)==1){
+		log_flg = 1;
+	}
+
+	
+    drone_params.twitter_announce = announce_flg;
+    drone_params.twitter_log = log_flg;
     drone_params.synth_pitch1_vol = model.ag[0].hp;
     drone_params.synth_pitch2_vol = model.ag[0].hp;
     drone_params.synth_pitch3_vol = model.ag[0].hp;
@@ -73,7 +85,7 @@ void ServerManager::mappingToDrone(){
     int checked_pan = autoPanCheck();
     if(checked_deg!=-1){
         drone_params.autopan_on = 1;
-        drone_params.autopan_rate = (float)scale(model.ag[checked_deg].hp, 0.4, 0.0, 0.0, 1.0);
+        drone_params.autopan_rate = (float)scale(model.ag[checked_pan].hp, 0.4, 0.0, 0.0, 1.0);
         drone_params.autopan_ammount = 0.7f;
         drone_params.autopan_randomness = 1.0f;
     
@@ -92,13 +104,15 @@ void ServerManager::mappingToDrone(){
     drone_params.reverb_dry = (float)scale(model.ag[1].circumference_posi, 1.0, -1.0, 1.0, 0.0);
     //AutoFilter
 //    drone_params.autofilter_on = 0;
-    drone_params.autofilter_on = 0;
+    drone_params.autofilter_on = 1;
 //    drone_params.auto_filter_ammount = 0.7f;
     drone_params.auto_filter_ammount = (float)scale(model.ag[0].circumference_posi, 1.0, -1.0, 1.0, 0.0);
-    drone_params.auto_filter_rate = 0.7f;
+    drone_params.auto_filter_rate =  (float)scale(model.ag[1].circumference_posi, 1.0, -1.0, 1.0, 0.0);
 //    drone_params.auto_filter_cutoff = 0.7f;
-    drone_params.auto_filter_cutoff = 0.5f;
+    drone_params.auto_filter_cutoff = (float)scale(model.ag[2].circumference_posi, 1.0, -1.0, 1.0, 0.0);//0.5f;
     
+	 srand(time(NULL));
+	int number = 1 + rand( ) % 2;
     drone_params.sequece_pattern = 1;
     
 }

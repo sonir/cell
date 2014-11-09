@@ -11,7 +11,6 @@
 #include "ServerManager.h"
 
 
-
 typedef struct system_t {
 
     int fps;
@@ -89,6 +88,8 @@ class ofApp : public ofBaseApp{
         slMetro *timerAgentStep;
         slMetro *timerSendingParameters;
         slMetro *timerArduinoUpdate;
+        slMetro *timerClipEvent;
+		slMetro *modeInterval;
         //Fis
     	DigitalFis digitalFis;
     

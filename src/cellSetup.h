@@ -14,8 +14,14 @@
 #define ARM_NUM 4
 
 //System Timers
-#define SENDING_INTERVAL 1.0f //5.0f
+#define SENDING_INTERVAL 8.0f //5.0f
 #define ARDUINO_UPDATE_INTERVAL 0.1f
+#define CLIP_EVENT_INTERVAL 4500.0f
+#define MODE_INTERVAL 5.0f
+
+#define INTERVAL_OF_REPORT_IN_MINUTES 75
+#define TWEET_RATE ( ( INTERVAL_OF_REPORT_IN_MINUTES*60 )/ SENDING_INTERVAL ) // 900 // ( INTERVAL_OF_REPORT_IN_MINUTES*60 )/ SENDING_INTERVAL
+
 
 //Modes
 #define DEFAULT_STOP_FLG 1
@@ -85,7 +91,7 @@
 #define PARAMETER_SPC 70
 #define LINE_HEIGHT 30
 #define LINE_HEIGHT_BODY 15.0f
-#define DISP_TITLE "CELL Operation System Ver0.9"
+#define DISP_TITLE "CELL Operation System Ver0.91"
 #define MESSAGE1 "SPC : START SIMULATOR"
 #define SENDIG_MES "connect with drone server"
 #define LB_MOVE_MODE1 "clock mode"
