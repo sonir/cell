@@ -68,6 +68,9 @@ void ofApp::update(){
 
     //Reset check for Mutex
     if(system.reset_flg){
+        
+        model->reset();
+        this->addAgents();
         system.reset_flg = 0;
     }        
     //Do Agent Cycle
@@ -356,6 +359,9 @@ void ofApp::keyReleased(int key){
     } else if (key == '4'){
         setPresetMode(PS_SYNC);
         updateSystemValue();
+    } else if (key == 'r'){
+        system.reset_flg = 1;
+        system.stop_flg = DEFAULT_STOP_FLG; // Init stop flag
     }
 
 
@@ -641,6 +647,16 @@ void ofApp::listenOsc(){
         }if(m.getAddress() == "/sensorVal"){
             system.light = m.getArgAsFloat(0);
             system.temp = m.getArgAsFloat(1);
+            
+        }if( m.getAddress() == "/pause" ){
+            
+            system.stop_flg = ( (system.stop_flg-1)*(-1) ); //Invert the value
+           
+        }if( m.getAddress() == "/pauseReset" ){
+            
+            system.reset_flg = 1;
+            system.stop_flg = DEFAULT_STOP_FLG; // Init stop flag
+            
         }else{
 			// unrecognized message: display on the bottom of the screen
 			string msg_string;
