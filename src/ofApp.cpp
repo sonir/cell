@@ -67,7 +67,7 @@ void ofApp::update(){
 
 
     //Reset check for Mutex
-    if(system.reset_flg){
+    if(system.reset_flg && !system.stop_flg ){ //do reset when the top of next go
         
         model->reset();
         this->addAgents();
@@ -100,7 +100,7 @@ void ofApp::update(){
         }
     }
 
-    if(timerSendingParameters->alart()){
+    if(timerSendingParameters->alart() && !system.stop_flg ){
         //Send Now Agents States
         snap.ag[0] = model->getAgent(0);
         snap.ag[1] = model->getAgent(1);
