@@ -232,6 +232,13 @@ void ofApp::draw(){
     ofSetColor(225);
     h1.drawString(DISP_TITLE, LEFT_OFFSET, TOP_OFFSET);
     h2.drawString(MESSAGE1, LEFT_OFFSET, top_offset+=LINE_HEIGHT);
+    
+    if(system.stop_flg){
+       
+        h1.drawString("STOPPED", 320, 400);
+        
+    }
+    
     //TODO:Is this correct?
     char tmpStr[40];
     sprintf(tmpStr, "light:%.3f temp:%.3f", system.light, system.temp);
@@ -362,6 +369,17 @@ void ofApp::keyReleased(int key){
     } else if (key == 'r'){
         system.reset_flg = 1;
         system.stop_flg = DEFAULT_STOP_FLG; // Init stop flag
+    } else if (key == 'q'){
+        
+        //Test Code is here
+        
+        //Test Clip and Print
+        //Send Now Agents States
+        snap.ag[0] = model->getAgent(0);
+        snap.ag[1] = model->getAgent(1);
+        snap.ag[2] = model->getAgent(2);
+        snap.ag[3] = model->getAgent(3);
+        sound.update(CLIP, snap);
     }
 
 
@@ -649,13 +667,17 @@ void ofApp::listenOsc(){
             system.temp = m.getArgAsFloat(1);
             
         }if( m.getAddress() == "/pause" ){
-            
             system.stop_flg = ( (system.stop_flg-1)*(-1) ); //Invert the value
+
+            ofxOscMessage m;
+            m.setAddress("/stopCallback");
+            m.addIntArg(system.stop_flg);
            
         }if( m.getAddress() == "/pauseReset" ){
             
             system.reset_flg = 1;
             system.stop_flg = DEFAULT_STOP_FLG; // Init stop flag
+        
             
         }else{
 			// unrecognized message: display on the bottom of the screen

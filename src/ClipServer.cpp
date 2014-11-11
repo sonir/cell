@@ -18,7 +18,7 @@ ClipServer::ClipServer(){
 
 
 void ClipServer::send(){
-//    initParam(&clip_param);
+    
     ofxOscMessage m;
     m.setAddress("/clip");
     m.addIntArg(clip_param.duration_frame);
@@ -45,7 +45,11 @@ void ClipServer::send(){
     m.addIntArg(clip_param.clip_id);
     //TODO: Rest until Start
     server.sendMessage(m);
-    printServer.sendMessage(m);
+    
+    ofxOscMessage m2;
+    m2.setAddress("/printQR");
+    m2.addIntArg((int)clip_param.clip_id);
+    printServer.sendMessage(m2);
     
 }
 
@@ -56,7 +60,7 @@ void ClipServer::send(clip_param_t getParams){
 
 void ClipServer::initParam(clip_param_t *pClip){
 
-    pClip->duration_frame = (int)ofRandom(2); // 1-3
+    pClip->duration_frame = (int)ofRandom(3)+1; // 1-3
     pClip->tick_snd = ofRandom(1199)+1;   //1-1200
     pClip->tick_noise = ofRandom(1199)+1; //1-1200
     pClip->snd1_type = ofRandom(4); //0-4
@@ -77,6 +81,7 @@ void ClipServer::initParam(clip_param_t *pClip){
     pClip->ef_noiseconv_on = ofRandom(1); //0,1
     pClip->ef_noise_conv_modamp = ofRandom(1.);
     pClip->clip_id = this->createId(); //pod number
+    
     
 //    pClip->duration_frame; // 1-3
 //    pClip->tick_snd;   //1-1200
