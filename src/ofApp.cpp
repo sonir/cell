@@ -98,80 +98,82 @@ void ofApp::update(){
             model->initTouchEvent();
             
         }
-    }
+//    }
 
-    if(timerSendingParameters->alart() && !system.stop_flg ){
-        //Send Now Agents States
-        snap.ag[0] = model->getAgent(0);
-        snap.ag[1] = model->getAgent(1);
-        snap.ag[2] = model->getAgent(2);
-        snap.ag[3] = model->getAgent(3);
-        sound.update(SOUND, snap);
-        //TODO: make timer for clip
-//        sound.update(CLIP, snap);
-        system.sent_drone = true;
-    }
+        if(timerSendingParameters->alart()){
+            //Send Now Agents States
+            snap.ag[0] = model->getAgent(0);
+            snap.ag[1] = model->getAgent(1);
+            snap.ag[2] = model->getAgent(2);
+            snap.ag[3] = model->getAgent(3);
+            sound.update(SOUND, snap);
+            //TODO: make timer for clip
+    //        sound.update(CLIP, snap);
+            system.sent_drone = true;
+        }
 
-    if(timerArduinoUpdate->alart()){
-        //Send Now Agents States
-        snap.ag[0] = model->getAgent(0);
-        snap.ag[1] = model->getAgent(1);
-        snap.ag[2] = model->getAgent(2);
-        snap.ag[3] = model->getAgent(3);
-        sound.update(ARDUINO, snap);
-    }
+        if(timerArduinoUpdate->alart()){
+            //Send Now Agents States
+            snap.ag[0] = model->getAgent(0);
+            snap.ag[1] = model->getAgent(1);
+            snap.ag[2] = model->getAgent(2);
+            snap.ag[3] = model->getAgent(3);
+            sound.update(ARDUINO, snap);
+        }
 
-    if(timerClipEvent->alart()){
+        if(timerClipEvent->alart()){
 
-        //Send Now Agents States
-        snap.ag[0] = model->getAgent(0);
-        snap.ag[1] = model->getAgent(1);
-        snap.ag[2] = model->getAgent(2);
-        snap.ag[3] = model->getAgent(3);        
-        sound.update(CLIP, snap);
+            //Send Now Agents States
+            snap.ag[0] = model->getAgent(0);
+            snap.ag[1] = model->getAgent(1);
+            snap.ag[2] = model->getAgent(2);
+            snap.ag[3] = model->getAgent(3);        
+            sound.update(CLIP, snap);
+            
+        }
         
-    }
-	
-	if(modeInterval->alart()){
-		
-//        //Send Now Agents States
-//        setPresetMode( toolKit.dice(3)+1);
-		
-		//
-//		switch (toolKit.dice(3)-1){
-//				
-//			case 0:
-//				setPresetMode(PS_DEFAULT);
-//				updateSystemValue();				
-//				cout << "mode PS_DEFAULT" << endl;
-//				break;
-//				
-//			case 1:
-//				setPresetMode(PS_MICRO);
-//				updateSystemValue();				
-//				cout << "mode: PS_MICRO" << endl;
-//				break;
-//				
-//			case 2:
-//				setPresetMode(PS_CATHARSIS);
-//				updateSystemValue();				
-//				cout << "mode: PS_MICRO" << endl;
-//				break;
-//				
-//			default:
-//				setPresetMode(PS_DEFAULT);
-//				updateSystemValue();				
-//				cout << "mode: by SWITCH_DEFAULT PS_DEFAULT" << endl;				
-//				break;
-//				
-//				
-//				
-//		}
-        
-    }
+        if(modeInterval->alart()){
+            
+    //        //Send Now Agents States
+    //        setPresetMode( toolKit.dice(3)+1);
+            
+            //
+    //		switch (toolKit.dice(3)-1){
+    //				
+    //			case 0:
+    //				setPresetMode(PS_DEFAULT);
+    //				updateSystemValue();				
+    //				cout << "mode PS_DEFAULT" << endl;
+    //				break;
+    //				
+    //			case 1:
+    //				setPresetMode(PS_MICRO);
+    //				updateSystemValue();				
+    //				cout << "mode: PS_MICRO" << endl;
+    //				break;
+    //				
+    //			case 2:
+    //				setPresetMode(PS_CATHARSIS);
+    //				updateSystemValue();				
+    //				cout << "mode: PS_MICRO" << endl;
+    //				break;
+    //				
+    //			default:
+    //				setPresetMode(PS_DEFAULT);
+    //				updateSystemValue();				
+    //				cout << "mode: by SWITCH_DEFAULT PS_DEFAULT" << endl;				
+    //				break;
+    //				
+    //				
+    //				
+    //		}
+            
+        }
 
-    
-    sendData();
+        
+//        sendData();
+    } //End of stop flag limitation
+
 	listenOsc();
     
 }
