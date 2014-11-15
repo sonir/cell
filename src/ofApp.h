@@ -27,6 +27,7 @@ typedef struct system_t {
 
     float light; 
     float temp;
+    float beat_fix;
     
     string now_mode;
     

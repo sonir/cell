@@ -18,6 +18,7 @@ void ofApp::setup(){
     system.sent_drone = 0;
     system.temp = 25.0f;
     system.light = 0.5f;
+    system.beat_fix = 1.0;
     //Init Timers
     timerAgentStep = new slMetro(system.step_interval);
     timerSendingParameters = new slMetro(system.sending_interval);
@@ -549,9 +550,9 @@ void ofApp::updateSystemValue(){
     ofSetFrameRate(system.fps);
     
     if(system.clock_flg){
-        timerAgentStep->set(system.step_interval);
+        timerAgentStep->set(system.step_interval*system.beat_fix);
     }else{
-        timerAgentStep->set(system.step_interval_normal_mode);
+        timerAgentStep->set(system.step_interval_normal_mode*system.beat_fix);
     }
     
     
@@ -737,6 +738,13 @@ void ofApp::listenOsc(){
             system.reset_flg = 1;
             system.stop_flg = DEFAULT_STOP_FLG; // Init stop flag
         
+            
+        }if ( m.getAddress() == "/beat_fix" ){
+            
+            system.beat_fix = m.getArgAsFloat(0);
+//            setPresetMode(PS_DEFAULT);
+            updateSystemValue();
+
             
         }else{
 			// unrecognized message: display on the bottom of the screen
