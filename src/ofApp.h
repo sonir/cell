@@ -28,6 +28,8 @@ typedef struct system_t {
     float light; 
     float temp;
     
+    string now_mode;
+    
 }system_t;
 
 typedef struct preset_t{

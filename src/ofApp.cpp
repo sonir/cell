@@ -58,6 +58,8 @@ void ofApp::setup(){
     //Add Agents
     this->addAgents();
 
+    //INIT modename
+    system.now_mode = "mode> PS_DEFAULT";
     
     
 }
@@ -134,40 +136,87 @@ void ofApp::update(){
         
         if(modeInterval->alart()){
             
-    //        //Send Now Agents States
-    //        setPresetMode( toolKit.dice(3)+1);
+            //Send Now Agents States
+//            setPresetMode( (preset_mode_t)toolKit.dice(3)+1);
+
             
-            //
-    //		switch (toolKit.dice(3)-1){
-    //				
-    //			case 0:
-    //				setPresetMode(PS_DEFAULT);
-    //				updateSystemValue();				
-    //				cout << "mode PS_DEFAULT" << endl;
-    //				break;
-    //				
-    //			case 1:
-    //				setPresetMode(PS_MICRO);
-    //				updateSystemValue();				
-    //				cout << "mode: PS_MICRO" << endl;
-    //				break;
-    //				
-    //			case 2:
-    //				setPresetMode(PS_CATHARSIS);
-    //				updateSystemValue();				
-    //				cout << "mode: PS_MICRO" << endl;
-    //				break;
-    //				
-    //			default:
-    //				setPresetMode(PS_DEFAULT);
-    //				updateSystemValue();				
-    //				cout << "mode: by SWITCH_DEFAULT PS_DEFAULT" << endl;				
-    //				break;
-    //				
-    //				
-    //				
-    //		}
-            
+            modeInterval->set(MODE_INTERVAL);
+    		switch (toolKit.dice(10)-1){
+    				
+    			case 0:
+                    setPresetMode(PS_MICRO);
+                    updateSystemValue();
+                    system.now_mode = "mode> PS_MICRO";
+    				break;
+    				
+    			case 1:
+    				setPresetMode(PS_MICRO);
+    				updateSystemValue();				
+                    system.now_mode = "mode> PS_MICRO";
+    				break;
+    				
+    			case 2:
+                    setPresetMode(PS_MICRO);
+                    updateSystemValue();
+                    system.now_mode = "mode> PS_MICRO";
+    				break;
+                    
+                    
+                case 3:
+                    setPresetMode(PS_MICRO);
+                    updateSystemValue();
+                    system.now_mode = "mode> PS_MICRO";
+                    break;
+
+                case 4:
+                    setPresetMode(PS_MICRO);
+                    updateSystemValue();
+                    system.now_mode = "mode> PS_MICRO";
+                    break;
+
+                case 5:
+                    setPresetMode(PS_DEFAULT);
+                    updateSystemValue();
+                    system.now_mode = "mode> PS_DEFAULT";
+                    break;
+
+                case 6:
+                    setPresetMode(PS_DEFAULT);
+                    updateSystemValue();
+                    //    				cout << "mode PS_DEFAULT" << endl;
+                    system.now_mode = "mode> PS_DEFAULT";
+                    break;
+
+                case 7:
+                    setPresetMode(PS_DEFAULT);
+                    updateSystemValue();
+                    //    				cout << "mode PS_DEFAULT" << endl;
+                    system.now_mode = "mode> PS_DEFAULT";
+                    break;
+                    
+                case 8:
+                    setPresetMode(PS_DEFAULT);
+                    updateSystemValue();
+                    system.now_mode = "mode> PS_DEFAULT";
+                    break;
+                    
+                case 9:
+                    setPresetMode(PS_CATHARSIS);
+                    updateSystemValue();
+                    system.now_mode = "mode> PS_CATHARSIS";
+                    modeInterval->set(MODE_INTERVAL_SHORT);
+                    break;
+
+                    
+    			default:
+    				setPresetMode(PS_DEFAULT);
+    				updateSystemValue();				
+//    				cout << "mode: by SWITCH_DEFAULT PS_DEFAULT" << endl;
+                    system.now_mode = "mode> PS_DEFAULT";
+    				break;
+                    
+    		}
+         
         }
 
         
@@ -264,6 +313,9 @@ void ofApp::draw(){
     else ofSetColor(0, 80, 0);
     body.drawString(LB_MOVE_MODE1, LEFT_OFFSET+15., SCREEN_HEIGHT-(LINE_HEIGHT_BODY*2));
 
+    //Display mode name
+    h2.drawString(system.now_mode, LEFT_OFFSET, LINE_HEIGHT*4);
+
 }
 
 float ofApp::dispAgentParam(float top_offset, int ag_id){
@@ -318,7 +370,7 @@ float ofApp::dispAgentParam(float top_offset, int ag_id){
             break;
         case ATTACK:
             action = "ATTACK";
-            break;            
+            break;
         case DMG:
             action = "DMG";
             break;
@@ -356,18 +408,23 @@ void ofApp::keyReleased(int key){
     } else if (key == '0'){
         setPresetMode(PS_DEFAULT);
         updateSystemValue();
+        system.now_mode = "mode> PS_DEFAULT";
     } else if (key == '1'){
         setPresetMode(PS_MICRO);
         updateSystemValue();
+        system.now_mode = "mode> PS_MICRO";
     } else if (key == '2'){
         setPresetMode(PS_CATHARSIS);
         updateSystemValue();
+        system.now_mode = "mode> PS_CATHARSIS";
     } else if (key == '3'){
         setPresetMode(PS_VIBE);
         updateSystemValue();
+        system.now_mode = "mode> PS_VIBE";
     } else if (key == '4'){
         setPresetMode(PS_SYNC);
         updateSystemValue();
+        system.now_mode = "mode> PS_SYNC";
     } else if (key == 'r'){
         system.reset_flg = 1;
         system.stop_flg = DEFAULT_STOP_FLG; // Init stop flag
