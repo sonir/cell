@@ -27,6 +27,12 @@
 //Modes
 #define DEFAULT_STOP_FLG 1
 
+
+//For IC
+#define ATK_DEX_FIX 80
+
+
+
 //For Presets
 
 //PS_DEFAULT
@@ -111,6 +117,7 @@
 
 //Preset Mode
 typedef enum preset_mode { PS_DEFAULT, PS_MICRO, PS_CATHARSIS, PS_VIBE, PS_SYNC } preset_mode_t;
+typedef enum phase_t {RHYTHM, DRONE, SOLO} phase_t;
 
 
 #endif

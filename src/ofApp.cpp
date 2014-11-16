@@ -16,9 +16,12 @@ void ofApp::setup(){
     system.stop_flg = DEFAULT_STOP_FLG; // Init stop flag
     system.step_count = 0;
     system.sent_drone = 0;
-    system.temp = 25.0f;
-    system.light = 0.5f;
+//    system.temp = 25.0f;
+//    system.light = 0.5f;
     system.beat_fix = 1.0;
+    system.phase = RHYTHM;
+    for(int i =0;i<AG_MAX_NUM;i++)system.ag_atk[i]=false;
+    
     //Init Timers
     timerAgentStep = new slMetro(system.step_interval);
     timerSendingParameters = new slMetro(system.sending_interval);
@@ -82,23 +85,40 @@ void ofApp::update(){
         
         model->syncTouchEvent(touched);
         initTouched(); //Reset the flg after sending
-        
-        if(system.clock_flg){
-            //Clock Mode
-            if(timerAgentStep->alart()){
-                model->stroke(system.step_count);
-                model->initTouchEvent(system.step_count);
-                system.step_count++;
-                if(system.step_count>=ARM_NUM){
-                    system.step_count=0; //If finished one loop, Reset count
+ 
+        if (system.phase==RHYTHM) {
+            
+            
+            if(system.clock_flg){
+                //Clock Mode
+                if(timerAgentStep->alart()){
+                    atkCheck(system.step_count);
+                    model->stroke(system.step_count);
+                    model->initTouchEvent(system.step_count);
+                    resetAtk(system.step_count);
+                    system.step_count++;
+                    if(system.step_count>=ARM_NUM){
+                        system.step_count=0; //If finished one loop, Reset count
+                    }
+                    
+                }
+                
+            }else{ //Normal Mode
+                
+                if(timerAgentStep->alart()){
+                    //check ATK_MOV
+                    atkCheck();
+                    model->cycle();
+                    model->initTouchEvent();
+                    resetAtk();
                 }
                 
             }
             
-        }else{ //Normal Mode
             
-            if(timerAgentStep->alart())model->cycle();
-            model->initTouchEvent();
+        }else if (system.phase==SOLO){
+            
+            
             
         }
 //    }
@@ -293,7 +313,7 @@ void ofApp::draw(){
     
     //TODO:Is this correct?
     char tmpStr[40];
-    sprintf(tmpStr, "light:%.3f temp:%.3f", system.light, system.temp);
+//    sprintf(tmpStr, "light:%.3f temp:%.3f", system.light, system.temp);
     h2.drawString(tmpStr, LEFT_OFFSET, top_offset+=LINE_HEIGHT),
     top_offset = this->dispAgentParam(top_offset,0);
     top_offset = this->dispAgentParam(top_offset,1);
@@ -440,6 +460,10 @@ void ofApp::keyReleased(int key){
         snap.ag[2] = model->getAgent(2);
         snap.ag[3] = model->getAgent(3);
         sound.update(CLIP, snap);
+    } else if (key == 's'){
+//        TODO: check solomode
+        system.phase == SOLO;
+        
     }
 
 
@@ -656,6 +680,10 @@ void ofApp::addAgents(){
     ag4.posi.y = 1.;
     model->addAgent(&ag4);
     
+    for(int i=0; i< AG_MAX_NUM; i++){
+        agent tmp = model->getAgent(i);
+        system.ag_dexterity_org[i] = tmp.dexterity;
+    }
  
     //Sync ag position and arm position
     this->syncPositions();
@@ -722,10 +750,6 @@ void ofApp::listenOsc(){
             touched.ag[m.getArgAsInt32(0)] = true;
             //system.stop_flg=1;
             
-        }if(m.getAddress() == "/sensorVal"){
-            system.light = m.getArgAsFloat(0);
-            system.temp = m.getArgAsFloat(1);
-            
         }if( m.getAddress() == "/pause" ){
             system.stop_flg = ( (system.stop_flg-1)*(-1) ); //Invert the value
 
@@ -745,6 +769,10 @@ void ofApp::listenOsc(){
 //            setPresetMode(PS_DEFAULT);
             updateSystemValue();
 
+        }else if ( m.getAddress() == "/atk" ){
+                
+            cout << "atk" << m.getArgAsInt32(0) << endl;
+            system.ag_atk[m.getArgAsInt32(0)]=true;
             
         }else{
 			// unrecognized message: display on the bottom of the screen
@@ -812,4 +840,70 @@ void ofApp::initTouched(){
     
     
 }
+
+
+void ofApp::atkCheck(){
+    
+    for(int i=0; i<AG_MAX_NUM; i++){
+        if(system.ag_atk[i]==true){
+            
+            atkCheck(i);
+            
+        }
+        
+    }
+    
+}
+
+void ofApp::atkCheck(int ag_id){
+    
+    //Ignore unknown ag_id
+    if (ag_id >= AG_MAX_NUM){
+     
+        cout << "ATKCHK: Unknown AG" << endl;
+        return;
+        
+    }
+    
+    
+    if(system.ag_atk[ag_id]==true){
+        
+        agent tmp = model->getAgent(ag_id);
+        tmp.dexterity += ATK_DEX_FIX;
+        model->setAgent(ag_id, &tmp);
+        
+    }
+
+    
+    
+    
+}
+
+void ofApp::resetAtk(){
+    
+    for(int i=0; i<AG_MAX_NUM;i++){
+        
+        if(system.ag_atk[i]){
+            
+            resetAtk(i);
+            
+        }
+        
+    }
+    
+}
+
+void ofApp::resetAtk(int ag_id){
+    
+    if(system.ag_atk[ag_id]){
+        
+        agent tmp = model->getAgent(ag_id);
+        tmp.dexterity = system.ag_dexterity_org[ag_id];
+        model->setAgent(ag_id, &tmp);
+        system.ag_atk[ag_id]=false;
+
+    }
+    
+}
+
 

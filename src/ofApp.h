@@ -25,10 +25,15 @@ typedef struct system_t {
     int step_count;
     bool sent_drone;
 
-    float light; 
-    float temp;
-    float beat_fix;
+//    float light; 
+//    float temp;
     
+    //For IC
+    float beat_fix;
+    bool ag_atk[AG_MAX_NUM];
+    int ag_dexterity_org[AG_MAX_NUM];
+    
+    phase_t phase;
     string now_mode;
     
 }system_t;
@@ -138,5 +143,11 @@ class ofApp : public ofBaseApp{
         phisical_contact_t touched;
         void initTouched();
     
+    
+        //IC
+        void atkCheck();
+        void atkCheck(int ag_id);
+        void resetAtk();
+        void resetAtk(int ag_id);
 
 };
