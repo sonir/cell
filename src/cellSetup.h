@@ -30,16 +30,19 @@
 
 //For IC
 #define ATK_DEX_FIX 80
-
+#define SOLO_FUCUSED_INIT_POSI 0.0
+#define SOLO_INIT_POSI -1.0
+#define SOLO_DURATION 64
+#define SOLO_MOV_INC 0.05 
 
 
 //For Presets
 
 //PS_DEFAULT
 #define DEFAULT_SYSTWM_FPS 60
-#define DEFAULT_STEP_INTERVAL 1.0f //0.2f
-#define DEFAULT_STEP_INTERVAL_NORMAL_MODE 0.15f
-#define DEFAULT_MOV_FIX ( BASIC_MOV_FIX * 10.0f)
+#define DEFAULT_STEP_INTERVAL 0.8f //0.2f
+#define DEFAULT_STEP_INTERVAL_NORMAL_MODE 0.35f
+#define DEFAULT_MOV_FIX ( BASIC_MOV_FIX * 15.0f)
 #define DEFAULT_RANDOM_WALK_FIX ( BASIC_RANDOM_WALK_FIX * 3.0 )
 #define DEFAULT_CLOCK_MODE 1
 
@@ -62,10 +65,10 @@
 //PS_VIBE
 #define PS_VIBE_SYSTWM_FPS DEFAULT_SYSTWM_FPS
 #define PS_VIBE_STEP_INTERVAL 0.2f
-#define PS_VIBE_STEP_INTERVAL_NORMAL_MODE 0.15f
-#define PS_VIBE_MOV_FIX 0.02f
-#define PS_VIBE_RANDOM_WALK_FIX 0.01f
-#define PS_VIBE_CLOCK_MODE 1
+#define PS_VIBE_STEP_INTERVAL_NORMAL_MODE 0.05f
+#define PS_VIBE_MOV_FIX 0.8f
+#define PS_VIBE_RANDOM_WALK_FIX 0.15f
+#define PS_VIBE_CLOCK_MODE 0
 
 //PS_SYNC
 #define PS_SYNC_SYSTWM_FPS DEFAULT_SYSTWM_FPS
@@ -99,7 +102,7 @@
 #define PARAMETER_SPC 70
 #define LINE_HEIGHT 30
 #define LINE_HEIGHT_BODY 15.0f
-#define DISP_TITLE "CELL Operation System Ver0.96"
+#define DISP_TITLE "CELL Operation System Ver0.97(ic)"
 #define MESSAGE1 "SPC : START SIMULATOR"
 #define SENDIG_MES "connect with drone server"
 #define LB_MOVE_MODE1 "clock mode"
@@ -118,6 +121,8 @@
 //Preset Mode
 typedef enum preset_mode { PS_DEFAULT, PS_MICRO, PS_CATHARSIS, PS_VIBE, PS_SYNC } preset_mode_t;
 typedef enum phase_t {RHYTHM, DRONE, SOLO} phase_t;
+
+
 
 
 #endif

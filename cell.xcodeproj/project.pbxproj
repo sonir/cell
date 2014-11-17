@@ -64,6 +64,7 @@
 		F2A2763619FAEE7500371500 /* DigitalFis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2A2763419FAEE7500371500 /* DigitalFis.cpp */; };
 		F2A8507D19FF14D400100FA5 /* DroneServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2A8507B19FF14D400100FA5 /* DroneServer.cpp */; };
 		F2BBF99C1A0B7D3700196099 /* ClipServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2BBF99A1A0B7D3700196099 /* ClipServer.cpp */; };
+		F2CD92451A182DB800A4EDAD /* clSolo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2CD92431A182DB800A4EDAD /* clSolo.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -207,6 +208,8 @@
 		F2A8507C19FF14D400100FA5 /* DroneServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DroneServer.h; sourceTree = "<group>"; };
 		F2BBF99A1A0B7D3700196099 /* ClipServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClipServer.cpp; sourceTree = "<group>"; };
 		F2BBF99B1A0B7D3700196099 /* ClipServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipServer.h; sourceTree = "<group>"; };
+		F2CD92431A182DB800A4EDAD /* clSolo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = clSolo.cpp; sourceTree = "<group>"; };
+		F2CD92441A182DB800A4EDAD /* clSolo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clSolo.h; sourceTree = "<group>"; };
 		F4F5B6B8BA2BD52C646ED908 /* OscException.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = OscException.h; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscException.h; sourceTree = SOURCE_ROOT; };
 		F7FBC56859535E597B24BB91 /* NetworkingUtils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = NetworkingUtils.h; path = ../../../addons/ofxOsc/libs/oscpack/src/ip/NetworkingUtils.h; sourceTree = SOURCE_ROOT; };
 		FC5DA1C87211D4F6377DA719 /* tinyxmlparser.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = tinyxmlparser.cpp; path = ../../../addons/ofxXmlSettings/libs/tinyxmlparser.cpp; sourceTree = SOURCE_ROOT; };
@@ -462,11 +465,13 @@
 			isa = PBXGroup;
 			children = (
 				F278B65519FF9551009179A5 /* cellSetup.h */,
+				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
+				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
+				F2CD92431A182DB800A4EDAD /* clSolo.cpp */,
+				F2CD92441A182DB800A4EDAD /* clSolo.h */,
 				F2A2763419FAEE7500371500 /* DigitalFis.cpp */,
 				F2A2763519FAEE7500371500 /* DigitalFis.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
-				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
-				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				F29A7BC41A0254D600BAB6C4 /* ArduinoServer.cpp */,
 				F29A7BC51A0254D600BAB6C4 /* ArduinoServer.h */,
 				F2A8507B19FF14D400100FA5 /* DroneServer.cpp */,
@@ -710,6 +715,7 @@
 				F248BFAD19FEA5BD00757B40 /* slCellModel.cpp in Sources */,
 				4ADB88E2FB52E76A471065DE /* ofxOscParameterSync.cpp in Sources */,
 				640279EE111671BD026CB013 /* ofxOscReceiver.cpp in Sources */,
+				F2CD92451A182DB800A4EDAD /* clSolo.cpp in Sources */,
 				8F5205AEF8861EF234F0651A /* ofxOscSender.cpp in Sources */,
 				ADE367465D2A8EBAD4C7A8D9 /* IpEndpointName.cpp in Sources */,
 				F2BBF99C1A0B7D3700196099 /* ClipServer.cpp in Sources */,

@@ -5,28 +5,29 @@
 #include "ofxOsc.h"
 #include "slCircular.h"
 #include "slEuclid.h"
-#include "slCellModel.h"
 #include "slMetro.h"
 #include "DigitalFis.h"
 #include "ServerManager.h"
+#include "clSolo.h"
+#include "slCellModel.h"
 
 
 typedef struct system_t {
-
+    
     int fps;
     float step_interval;
     float step_interval_normal_mode;
     float sending_interval;
     float arduino_update_interval;
-        
+    
     int reset_flg;
     int stop_flg;
     int clock_flg;
     int step_count;
     bool sent_drone;
-
-//    float light; 
-//    float temp;
+    
+    //    float light;
+    //    float temp;
     
     //For IC
     float beat_fix;
@@ -36,7 +37,8 @@ typedef struct system_t {
     phase_t phase;
     string now_mode;
     
-}system_t;
+} system_t;
+
 
 typedef struct preset_t{
     
@@ -149,5 +151,6 @@ class ofApp : public ofBaseApp{
         void atkCheck(int ag_id);
         void resetAtk();
         void resetAtk(int ag_id);
+        clSolo *solo;
 
 };

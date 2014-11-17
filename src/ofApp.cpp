@@ -61,6 +61,8 @@ void ofApp::setup(){
 
     //Add Agents
     this->addAgents();
+    solo = new clSolo(model);
+    
 
     //INIT modename
     system.now_mode = "mode> PS_DEFAULT";
@@ -71,7 +73,7 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
 
-
+    
     //Reset check for Mutex
     if(system.reset_flg && !system.stop_flg ){ //do reset when the top of next go
         
@@ -82,46 +84,58 @@ void ofApp::update(){
     //Do Agent Cycle
     if(!system.stop_flg){
         
-        
         model->syncTouchEvent(touched);
         initTouched(); //Reset the flg after sending
  
-        if (system.phase==RHYTHM) {
+        if (system.phase==RHYTHM){
             
+//            cout << "phase is rhythm" << endl;
             
-            if(system.clock_flg){
-                //Clock Mode
-                if(timerAgentStep->alart()){
-                    atkCheck(system.step_count);
-                    model->stroke(system.step_count);
-                    model->initTouchEvent(system.step_count);
-                    resetAtk(system.step_count);
-                    system.step_count++;
-                    if(system.step_count>=ARM_NUM){
-                        system.step_count=0; //If finished one loop, Reset count
-                    }
+            if(timerAgentStep->alart()){
+                
+                if(system.clock_flg){
+                    //Clock Mode
+                        atkCheck(system.step_count);
+                        model->stroke(system.step_count);
+                        model->initTouchEvent(system.step_count);
+                        resetAtk(system.step_count);
+                        system.step_count++;
+                        if(system.step_count>=ARM_NUM){
+                            system.step_count=0; //If finished one loop, Reset count
+                        }
                     
+                }else{ //Normal Mode
+                    
+                        //check ATK_MOV
+                        atkCheck();
+                        model->cycle();
+                        model->initTouchEvent();
+                        resetAtk();
                 }
+            }
+            
+        }
+        
+        if(system.phase==SOLO){
+            
+            // It was first turn.
+            if( solo->isInit() ){
+                solo->initParam(); //Init the params
+            }else if( solo->countCheck() || solo->touchCheck()){
                 
-            }else{ //Normal Mode
-                
-                if(timerAgentStep->alart()){
-                    //check ATK_MOV
-                    atkCheck();
-                    model->cycle();
-                    model->initTouchEvent();
-                    resetAtk();
-                }
+                solo->reset();
                 
             }
             
-            
-        }else if (system.phase==SOLO){
-            
-            
+            if(system.ag_atk[solo->focused_ag]){ //If the instrument was played
+                
+                atkCheck(solo->focused_ag);
+                solo->action();
+                resetAtk(solo->focused_ag);
+                
+            }
             
         }
-//    }
 
         if(timerSendingParameters->alart()){
             //Send Now Agents States
@@ -155,90 +169,90 @@ void ofApp::update(){
             
         }
         
-        if(modeInterval->alart()){
-            
-            //Send Now Agents States
-//            setPresetMode( (preset_mode_t)toolKit.dice(3)+1);
-
-            
-            modeInterval->set(MODE_INTERVAL);
-    		switch (toolKit.dice(10)-1){
-    				
-    			case 0:
-                    setPresetMode(PS_MICRO);
-                    updateSystemValue();
-                    system.now_mode = "mode> PS_MICRO";
-    				break;
-    				
-    			case 1:
-    				setPresetMode(PS_MICRO);
-    				updateSystemValue();				
-                    system.now_mode = "mode> PS_MICRO";
-    				break;
-    				
-    			case 2:
-                    setPresetMode(PS_MICRO);
-                    updateSystemValue();
-                    system.now_mode = "mode> PS_MICRO";
-    				break;
-                    
-                    
-                case 3:
-                    setPresetMode(PS_MICRO);
-                    updateSystemValue();
-                    system.now_mode = "mode> PS_MICRO";
-                    break;
-
-                case 4:
-                    setPresetMode(PS_MICRO);
-                    updateSystemValue();
-                    system.now_mode = "mode> PS_MICRO";
-                    break;
-
-                case 5:
-                    setPresetMode(PS_DEFAULT);
-                    updateSystemValue();
-                    system.now_mode = "mode> PS_DEFAULT";
-                    break;
-
-                case 6:
-                    setPresetMode(PS_DEFAULT);
-                    updateSystemValue();
-                    //    				cout << "mode PS_DEFAULT" << endl;
-                    system.now_mode = "mode> PS_DEFAULT";
-                    break;
-
-                case 7:
-                    setPresetMode(PS_DEFAULT);
-                    updateSystemValue();
-                    //    				cout << "mode PS_DEFAULT" << endl;
-                    system.now_mode = "mode> PS_DEFAULT";
-                    break;
-                    
-                case 8:
-                    setPresetMode(PS_DEFAULT);
-                    updateSystemValue();
-                    system.now_mode = "mode> PS_DEFAULT";
-                    break;
-                    
-                case 9:
-                    setPresetMode(PS_CATHARSIS);
-                    updateSystemValue();
-                    system.now_mode = "mode> PS_CATHARSIS";
-                    modeInterval->set(MODE_INTERVAL_SHORT);
-                    break;
-
-                    
-    			default:
-    				setPresetMode(PS_DEFAULT);
-    				updateSystemValue();				
-//    				cout << "mode: by SWITCH_DEFAULT PS_DEFAULT" << endl;
-                    system.now_mode = "mode> PS_DEFAULT";
-    				break;
-                    
-    		}
-         
-        }
+//        if(modeInterval->alart()){
+//            
+//            //Send Now Agents States
+////            setPresetMode( (preset_mode_t)toolKit.dice(3)+1);
+//
+//            
+//            modeInterval->set(MODE_INTERVAL);
+//    		switch (toolKit.dice(10)-1){
+//    				
+//    			case 0:
+//                    setPresetMode(PS_MICRO);
+//                    updateSystemValue();
+//                    system.now_mode = "mode> PS_MICRO";
+//    				break;
+//    				
+//    			case 1:
+//    				setPresetMode(PS_MICRO);
+//    				updateSystemValue();				
+//                    system.now_mode = "mode> PS_MICRO";
+//    				break;
+//    				
+//    			case 2:
+//                    setPresetMode(PS_MICRO);
+//                    updateSystemValue();
+//                    system.now_mode = "mode> PS_MICRO";
+//    				break;
+//                    
+//                    
+//                case 3:
+//                    setPresetMode(PS_MICRO);
+//                    updateSystemValue();
+//                    system.now_mode = "mode> PS_MICRO";
+//                    break;
+//
+//                case 4:
+//                    setPresetMode(PS_MICRO);
+//                    updateSystemValue();
+//                    system.now_mode = "mode> PS_MICRO";
+//                    break;
+//
+//                case 5:
+//                    setPresetMode(PS_DEFAULT);
+//                    updateSystemValue();
+//                    system.now_mode = "mode> PS_DEFAULT";
+//                    break;
+//
+//                case 6:
+//                    setPresetMode(PS_DEFAULT);
+//                    updateSystemValue();
+//                    //    				cout << "mode PS_DEFAULT" << endl;
+//                    system.now_mode = "mode> PS_DEFAULT";
+//                    break;
+//
+//                case 7:
+//                    setPresetMode(PS_DEFAULT);
+//                    updateSystemValue();
+//                    //    				cout << "mode PS_DEFAULT" << endl;
+//                    system.now_mode = "mode> PS_DEFAULT";
+//                    break;
+//                    
+//                case 8:
+//                    setPresetMode(PS_DEFAULT);
+//                    updateSystemValue();
+//                    system.now_mode = "mode> PS_DEFAULT";
+//                    break;
+//                    
+//                case 9:
+//                    setPresetMode(PS_CATHARSIS);
+//                    updateSystemValue();
+//                    system.now_mode = "mode> PS_CATHARSIS";
+//                    modeInterval->set(MODE_INTERVAL_SHORT);
+//                    break;
+//
+//                    
+//    			default:
+//    				setPresetMode(PS_DEFAULT);
+//    				updateSystemValue();				
+////    				cout << "mode: by SWITCH_DEFAULT PS_DEFAULT" << endl;
+//                    system.now_mode = "mode> PS_DEFAULT";
+//    				break;
+//                    
+//    		}
+//         
+//        }
 
         
 //        sendData();
@@ -254,7 +268,6 @@ void ofApp::draw(){
 
 	sl_screen_position center;
 	sl_screen_position node;
-    
     ofBackground(0, 0, 0);
 
     
@@ -314,6 +327,11 @@ void ofApp::draw(){
     //TODO:Is this correct?
     char tmpStr[40];
 //    sprintf(tmpStr, "light:%.3f temp:%.3f", system.light, system.temp);
+    if(system.phase==SOLO){
+        sprintf(tmpStr, "%s (%s)", "phase: SOLO", "key: s-solo n-rhythm");
+    }else{
+        sprintf(tmpStr, "%s (%s)", "phase: RHYTHM" , "key: s-solo n-rhythm");
+    }
     h2.drawString(tmpStr, LEFT_OFFSET, top_offset+=LINE_HEIGHT),
     top_offset = this->dispAgentParam(top_offset,0);
     top_offset = this->dispAgentParam(top_offset,1);
@@ -460,12 +478,23 @@ void ofApp::keyReleased(int key){
         snap.ag[2] = model->getAgent(2);
         snap.ag[3] = model->getAgent(3);
         sound.update(CLIP, snap);
+        
     } else if (key == 's'){
-//        TODO: check solomode
-        system.phase == SOLO;
+
+        system.phase = SOLO;
+        setPresetMode(PS_CATHARSIS);
+        system.now_mode = "mode> PS_CATHARSIS";
+        updateSystemValue();
+        
+    } else if (key == 'n'){
+        
+        system.phase = RHYTHM;
+        setPresetMode(PS_DEFAULT);
+        updateSystemValue();
+        system.now_mode = "mode> PS_DEFAULT";
+        solo->reset();
         
     }
-
 
 }
 
@@ -769,10 +798,16 @@ void ofApp::listenOsc(){
 //            setPresetMode(PS_DEFAULT);
             updateSystemValue();
 
-        }else if ( m.getAddress() == "/atk" ){
+        }else if ( m.getAddress() == "/mov_fix" ){
                 
-            cout << "atk" << m.getArgAsInt32(0) << endl;
+            model->setMovFix( m.getArgAsFloat(0) );
+            
+
+        }else if ( m.getAddress() == "/atk" ){
+            
+            //            cout << "atk" << m.getArgAsInt32(0) << endl;
             system.ag_atk[m.getArgAsInt32(0)]=true;
+
             
         }else{
 			// unrecognized message: display on the bottom of the screen
