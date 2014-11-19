@@ -40,7 +40,7 @@
 
 //PS_DEFAULT
 #define DEFAULT_SYSTWM_FPS 60
-#define DEFAULT_STEP_INTERVAL 0.8f //0.2f
+#define DEFAULT_STEP_INTERVAL 2.0f //0.2f
 #define DEFAULT_STEP_INTERVAL_NORMAL_MODE 0.35f
 #define DEFAULT_MOV_FIX ( BASIC_MOV_FIX * 15.0f)
 #define DEFAULT_RANDOM_WALK_FIX ( BASIC_RANDOM_WALK_FIX * 3.0 )
@@ -64,10 +64,10 @@
 
 //PS_VIBE
 #define PS_VIBE_SYSTWM_FPS DEFAULT_SYSTWM_FPS
-#define PS_VIBE_STEP_INTERVAL 0.2f
-#define PS_VIBE_STEP_INTERVAL_NORMAL_MODE 0.05f
-#define PS_VIBE_MOV_FIX 0.8f
-#define PS_VIBE_RANDOM_WALK_FIX 0.15f
+#define PS_VIBE_STEP_INTERVAL 0.01f
+#define PS_VIBE_STEP_INTERVAL_NORMAL_MODE 0.01f
+#define PS_VIBE_MOV_FIX 0.3f
+#define PS_VIBE_RANDOM_WALK_FIX 0.03f
 #define PS_VIBE_CLOCK_MODE 0
 
 //PS_SYNC
@@ -102,7 +102,7 @@
 #define PARAMETER_SPC 70
 #define LINE_HEIGHT 30
 #define LINE_HEIGHT_BODY 15.0f
-#define DISP_TITLE "CELL Operation System Ver0.97(ic)"
+#define DISP_TITLE "CELL Operation System Ver0.98(ic)"
 #define MESSAGE1 "SPC : START SIMULATOR"
 #define SENDIG_MES "connect with drone server"
 #define LB_MOVE_MODE1 "clock mode"
@@ -120,7 +120,7 @@
 
 //Preset Mode
 typedef enum preset_mode { PS_DEFAULT, PS_MICRO, PS_CATHARSIS, PS_VIBE, PS_SYNC } preset_mode_t;
-typedef enum phase_t {RHYTHM, DRONE, SOLO} phase_t;
+typedef enum phase_t {RHYTHM, DRONE, SOLO, CLIMAX} phase_t;
 
 
 

@@ -10,6 +10,7 @@
 #include "ServerManager.h"
 #include "clSolo.h"
 #include "slCellModel.h"
+#include "clDronePhase.h"
 
 
 typedef struct system_t {
@@ -87,6 +88,8 @@ class ofApp : public ofBaseApp{
 		string msg_strings[NUM_MSG_STRINGS];
 		float timers[NUM_MSG_STRINGS];
         void sendData();
+        agent ag_org[AG_MAX_NUM];
+
     
 
     private:
@@ -151,6 +154,8 @@ class ofApp : public ofBaseApp{
         void atkCheck(int ag_id);
         void resetAtk();
         void resetAtk(int ag_id);
+        void resetAgent();    
         clSolo *solo;
+        clDronePhase *dronePhase;
 
 };

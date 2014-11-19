@@ -55,6 +55,7 @@
 		F248BFAC19FEA5BD00757B40 /* cellModelDataFoundation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F248BF8E19FEA5BC00757B40 /* cellModelDataFoundation.cpp */; };
 		F248BFAD19FEA5BD00757B40 /* slCellModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F248BF9019FEA5BC00757B40 /* slCellModel.cpp */; };
 		F248BFAE19FEA5BD00757B40 /* Toolkit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F248BF9319FEA5BC00757B40 /* Toolkit.cpp */; };
+		F2666E3E1A1986CF00A97702 /* clDronePhase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F2666E3C1A1986CF00A97702 /* clDronePhase.cpp */; };
 		F285EB3169F1566CA3D93C20 /* ofxPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E112B3AEBEA2C091BF2B40AE /* ofxPanel.cpp */; };
 		F29A7BC61A0254D600BAB6C4 /* ArduinoServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F29A7BC41A0254D600BAB6C4 /* ArduinoServer.cpp */; };
 		F29A7BC91A02563B00BAB6C4 /* Server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F29A7BC71A02563B00BAB6C4 /* Server.cpp */; };
@@ -188,6 +189,8 @@
 		F248BF9219FEA5BC00757B40 /* slCellModelSetup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = slCellModelSetup.h; sourceTree = "<group>"; };
 		F248BF9319FEA5BC00757B40 /* Toolkit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Toolkit.cpp; sourceTree = "<group>"; };
 		F248BF9419FEA5BC00757B40 /* Toolkit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Toolkit.h; sourceTree = "<group>"; };
+		F2666E3C1A1986CF00A97702 /* clDronePhase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = clDronePhase.cpp; sourceTree = "<group>"; };
+		F2666E3D1A1986CF00A97702 /* clDronePhase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = clDronePhase.h; sourceTree = "<group>"; };
 		F278B65519FF9551009179A5 /* cellSetup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cellSetup.h; sourceTree = "<group>"; };
 		F29A7BC41A0254D600BAB6C4 /* ArduinoServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ArduinoServer.cpp; sourceTree = "<group>"; };
 		F29A7BC51A0254D600BAB6C4 /* ArduinoServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArduinoServer.h; sourceTree = "<group>"; };
@@ -467,6 +470,8 @@
 				F278B65519FF9551009179A5 /* cellSetup.h */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
+				F2666E3C1A1986CF00A97702 /* clDronePhase.cpp */,
+				F2666E3D1A1986CF00A97702 /* clDronePhase.h */,
 				F2CD92431A182DB800A4EDAD /* clSolo.cpp */,
 				F2CD92441A182DB800A4EDAD /* clSolo.h */,
 				F2A2763419FAEE7500371500 /* DigitalFis.cpp */,
@@ -736,6 +741,7 @@
 				F2A2763619FAEE7500371500 /* DigitalFis.cpp in Sources */,
 				9D44DC88EF9E7991B4A09951 /* tinyxmlerror.cpp in Sources */,
 				5A4349E9754D6FA14C0F2A3A /* tinyxmlparser.cpp in Sources */,
+				F2666E3E1A1986CF00A97702 /* clDronePhase.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

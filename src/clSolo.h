@@ -13,7 +13,7 @@
 #include "ofMain.h"
 #include "slCellModel.h"
 #include "cellSetup.h"
-#
+
 
 class clSolo{
     

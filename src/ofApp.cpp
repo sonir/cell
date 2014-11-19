@@ -62,6 +62,7 @@ void ofApp::setup(){
     //Add Agents
     this->addAgents();
     solo = new clSolo(model);
+    dronePhase = new clDronePhase(model);
     
 
     //INIT modename
@@ -87,7 +88,7 @@ void ofApp::update(){
         model->syncTouchEvent(touched);
         initTouched(); //Reset the flg after sending
  
-        if (system.phase==RHYTHM){
+        if (system.phase==RHYTHM || system.phase==CLIMAX){
             
 //            cout << "phase is rhythm" << endl;
             
@@ -136,6 +137,32 @@ void ofApp::update(){
             }
             
         }
+
+        if(system.phase==DRONE){
+            
+            // It was first turn.
+            if( dronePhase->isInit() ){
+                dronePhase->initParam(); //Init the params
+            }
+            
+            //Do interactions with Normal (not clock) mode
+            atkCheck();
+            model->cycle();
+            model->initTouchEvent();
+            resetAtk();
+            
+            
+//            if(system.ag_atk[solo->focused_ag]){ //If the instrument was played
+//                
+//                atkCheck(solo->focused_ag);
+//                solo->action();
+//                resetAtk(solo->focused_ag);
+//                
+//            }
+            
+        }
+        
+        
 
         if(timerSendingParameters->alart()){
             //Send Now Agents States
@@ -325,10 +352,19 @@ void ofApp::draw(){
     }
     
     //TODO:Is this correct?
-    char tmpStr[40];
+    char tmpStr[126];
 //    sprintf(tmpStr, "light:%.3f temp:%.3f", system.light, system.temp);
     if(system.phase==SOLO){
         sprintf(tmpStr, "%s (%s)", "phase: SOLO", "key: s-solo n-rhythm");
+    } else if (system.phase==CLIMAX) {
+        
+        sprintf(tmpStr, "%s (%s)", "phase: CLIMAX", "key: s-solo n-rhythm f-climax");
+        
+    } else if (system.phase==DRONE) {
+        
+        sprintf(tmpStr, "%s (%s)", "phase: DRONE", "key: s-solo n-rhythm f-climax");
+        
+        
     }else{
         sprintf(tmpStr, "%s (%s)", "phase: RHYTHM" , "key: s-solo n-rhythm");
     }
@@ -481,18 +517,59 @@ void ofApp::keyReleased(int key){
         
     } else if (key == 's'){
 
+        solo->reset();
+        dronePhase->reset();
+        resetAgent();
+        
+//        model->setMovFix(1.0);
+        
         system.phase = SOLO;
         setPresetMode(PS_CATHARSIS);
         system.now_mode = "mode> PS_CATHARSIS";
         updateSystemValue();
+    } else if (key == 'd'){
+        
+        solo->reset();
+        dronePhase->reset();
+        resetAgent();
+        
+//        model->setMovFix(1.0);
+        
+        system.phase = DRONE;
+        setPresetMode(PS_VIBE);
+        system.now_mode = "mode> PS_VIBE";
+        updateSystemValue();
+
+        
+    } else if ( key == 'f') {
+        
+        solo->reset();
+        dronePhase->reset();
+        resetAgent();
+        model->setMovFix(1.0);
+        
+        dronePhase->initParam();
+        
+        system.phase = CLIMAX;
+        setPresetMode(PS_CATHARSIS);
+        system.now_mode = "mode> PS_CATHARSIS";
+        system.step_interval = system.step_interval*0.75;
+        system.step_interval_normal_mode = system.step_interval_normal_mode*0.75;
+        model->setMovFix(14.3); //7.3
+        updateSystemValue();
+
         
     } else if (key == 'n'){
         
+        solo->reset();
+        dronePhase->reset();
+        resetAgent();
+//        model->setMovFix(1.0);
+        
         system.phase = RHYTHM;
         setPresetMode(PS_DEFAULT);
-        updateSystemValue();
         system.now_mode = "mode> PS_DEFAULT";
-        solo->reset();
+        updateSystemValue();
         
     }
 
@@ -712,6 +789,8 @@ void ofApp::addAgents(){
     for(int i=0; i< AG_MAX_NUM; i++){
         agent tmp = model->getAgent(i);
         system.ag_dexterity_org[i] = tmp.dexterity;
+        //TODO: Add AGENT COPY
+        ag_org[i]=tmp;
     }
  
     //Sync ag position and arm position
@@ -799,10 +878,13 @@ void ofApp::listenOsc(){
             updateSystemValue();
 
         }else if ( m.getAddress() == "/mov_fix" ){
-                
+        
             model->setMovFix( m.getArgAsFloat(0) );
             
 
+        }else if ( m.getAddress() == "/mov_random_fix" ){
+            model->setRandomWalkFix( m.getArgAsFloat(0) );
+            
         }else if ( m.getAddress() == "/atk" ){
             
             //            cout << "atk" << m.getArgAsInt32(0) << endl;
@@ -910,8 +992,6 @@ void ofApp::atkCheck(int ag_id){
     }
 
     
-    
-    
 }
 
 void ofApp::resetAtk(){
@@ -937,6 +1017,17 @@ void ofApp::resetAtk(int ag_id){
         model->setAgent(ag_id, &tmp);
         system.ag_atk[ag_id]=false;
 
+    }
+    
+}
+
+void ofApp::resetAgent(){
+    
+    for(int i=0;i<AG_MAX_NUM;i++){
+        
+        agent tmp = ag_org[i];
+        model->setAgent(i, &tmp);
+        
     }
     
 }
